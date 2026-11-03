@@ -8,10 +8,7 @@ export const en = {
   site: {
     name: '{{SITE_NAME}}',
     descriptor: 'Security by design for AI systems',
-    tagline: '{{TAGLINE}}',
-    h1: '{{HOME_H1: one sentence saying what the site is}}',
     skipToContent: 'Skip to content',
-    clockCity: 'Madrid',
   },
   menu: {
     label: 'Menu',
@@ -21,14 +18,7 @@ export const en = {
   home: {
     identityLabel: 'Site',
     menuLabel: 'Menu',
-    introLabel: 'About',
-    workLabel: 'Sections',
-    timeLabel: 'Local time',
     actionLabel: 'Start',
-    rows: [
-      { n: '01', name: 'Cybersecurity Initiative', category: 'Assess an AI system: attack techniques and controls', year: '2026', to: '/cybersecurity' },
-      { n: '02', name: "How it's implemented", category: 'Source matrices, questionnaire logic and mapping rules', year: '2026', to: '/how-it-works' },
-    ],
     cta: 'Assess an AI system',
   },
   cyber: {

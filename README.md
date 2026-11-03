@@ -45,4 +45,4 @@ the curation of the JNIC matrix (`matrix_curation.json`). The full list of propo
 - `src/data/` — generated JSON, including the curated JNIC matrix (`jnic-matrix.json`).
 - `src/pages/` — home, `cyber/`, `how/`.
 
-Placeholders to fill in `src/content/en.ts`: `{{SITE_NAME}}`, `{{TAGLINE}}` and the home H1.
+Placeholder to fill in `src/content/en.ts`: `{{SITE_NAME}}`.

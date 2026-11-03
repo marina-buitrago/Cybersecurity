@@ -417,8 +417,7 @@ table.table {
   a,
   .btn,
   .segmented button,
-  .menu a,
-  .work-row {
+  .menu a {
     transition: color 120ms ease, background-color 120ms ease, border-color 120ms ease;
   }
 }
