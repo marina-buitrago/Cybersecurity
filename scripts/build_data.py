@@ -381,7 +381,7 @@ readme_title, readme_version = readme_lines[0], readme_lines[1]
 readme_sections, current = [], None
 dropped_readme = []
 for ln in readme_lines[2:]:
-    if "MUC" in ln:  # names an internal, unpublishable file: never ingested
+    if "must not be published" in ln:  # refers to an internal, unpublishable file: never ingested
         dropped_readme.append(ln[:60] + "…")
         continue
     if not (ln.startswith("•") or re.match(r"^\d+\.", ln)) and len(ln) < 40:
