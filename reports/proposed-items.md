@@ -44,13 +44,3 @@ Each item is marked "proposed" in the data or the interface.
     (named under the cell); NIST AI RMF section titles added to the section numbers cited; "AESIA
     (ciberseguridad)" written "AESIA (cybersecurity)"; column J kept only where it is the matrix's own proposal;
     legal basis reached through the catalogue controls added to every row.
-
-## DPO Initiative
-
-14. **Deadline engine provisional arithmetic** until the counting regime is chosen per rule: same day number
-    in the target month (or its last day), calendar days, extension counted from the same start.
-15. **Knowledge cards**: identifiers other than DPO-DPIA-004, and the label "Legal obligation" on five cards.
-    Fields not stated in the brief are left empty ("Pending validation").
-16. **AI settings and AI architecture descriptions**, repository descriptions.
-17. **All demo content** (`src/data/dpo-demo.json`, `dpo-documents.json`): fictitious organisations,
-    roles and events, including the impact-assessment screening criteria and mock AI texts.

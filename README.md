@@ -1,7 +1,8 @@
-# DPO + AI cybersecurity (prototype)
+# AI security by design (prototype)
 
-Front-end prototype with three sections: **DPO Initiative**, **Cybersecurity Initiative** and
-**How it's implemented**. No backend, no authentication, no model calls, no cookies, no analytics.
+Front-end prototype with two sections: **Cybersecurity Initiative** (an AI-system questionnaire that leads to
+MITRE ATLAS techniques and controls) and **How it's implemented**. No backend, no authentication, no model
+calls, no cookies, no analytics.
 Questionnaire answers stay in the browser tab (sessionStorage).
 
 ## Run
@@ -9,7 +10,7 @@ Questionnaire answers stay in the browser tab (sessionStorage).
 ```sh
 npm install
 npm run dev        # http://localhost:5173
-npm test           # Vitest: engine and deadline tests
+npm test           # Vitest: assessment engine tests
 npm run build      # type-check and static build in dist/
 ```
 
@@ -39,10 +40,9 @@ the curation of the JNIC matrix (`matrix_curation.json`). The full list of propo
 ## Layout
 
 - `src/engine/` — pure, deterministic TypeScript: expression parser (no `eval`), questionnaire,
-  assessment, deadline rules. `service.ts` is the swappable boundary for a future backend.
+  assessment. `service.ts` is the swappable boundary for a future backend.
 - `src/content/en.ts` — every UI string.
-- `src/data/` — generated JSON (including the curated JNIC matrix, `jnic-matrix.json`) plus fictitious DPO
-  demo data (`dpo-*.json`).
-- `src/pages/` — home, `cyber/`, `dpo/`, `how/`.
+- `src/data/` — generated JSON, including the curated JNIC matrix (`jnic-matrix.json`).
+- `src/pages/` — home, `cyber/`, `how/`.
 
 Placeholders to fill in `src/content/en.ts`: `{{SITE_NAME}}`, `{{TAGLINE}}` and the home H1.

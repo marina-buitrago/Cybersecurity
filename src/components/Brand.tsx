@@ -15,7 +15,6 @@ export function Identity() {
 }
 
 export const MENU = [
-  { to: '/dpo', label: en.menu.dpo },
   { to: '/cybersecurity', label: en.menu.cyber },
   { to: '/how-it-works', label: en.menu.how },
 ];

@@ -5,7 +5,6 @@ import { AnswersProvider } from './pages/cyber/state';
 
 // Sections load on demand so the home page does not download the catalogue data.
 const CyberPage = lazy(() => import('./pages/cyber/CyberPage').then((m) => ({ default: m.CyberPage })));
-const DpoPage = lazy(() => import('./pages/dpo/DpoPage').then((m) => ({ default: m.DpoPage })));
 const HowPage = lazy(() => import('./pages/how/HowPage').then((m) => ({ default: m.HowPage })));
 
 /**
@@ -41,7 +40,6 @@ export function App() {
         <Suspense fallback={null}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/dpo/*" element={<DpoPage />} />
             <Route path="/cybersecurity/*" element={<CyberPage />} />
             <Route path="/how-it-works/*" element={<HowPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />

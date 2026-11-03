@@ -14,7 +14,6 @@ export function Tag({ kind = 'outline', children, title }: { kind?: TagKind; chi
 }
 
 export const TbcTag = () => <Tag kind="alert">{en.common.toBeConfirmed}</Tag>;
-export const Pending = () => <span className="muted">{en.common.pendingValidation}</span>;
 
 /** Native <details>: keyboard accessible, prints when opened. */
 export function Disclosure({
