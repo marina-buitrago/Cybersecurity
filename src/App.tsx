@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { HashRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { Home } from './pages/Home';
+import { AnswersProvider } from './pages/cyber/state';
 import { CyberPage } from './pages/cyber/CyberPage';
 import { DpoPage } from './pages/dpo/DpoPage';
 import { HowPage } from './pages/how/HowPage';
@@ -19,6 +20,7 @@ function FocusOnNavigate() {
 export function App() {
   return (
     <HashRouter>
+      <AnswersProvider>
       <FocusOnNavigate />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -27,6 +29,7 @@ export function App() {
         <Route path="/how-it-works/*" element={<HowPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      </AnswersProvider>
     </HashRouter>
   );
 }

@@ -1,0 +1,241 @@
+/* ---------- Lists ---------- */
+ul.plain {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+ul.plain > li + li {
+  margin-top: 4px;
+}
+
+/* ---------- Questionnaire ---------- */
+.progress {
+  margin: 4px 0 0;
+  color: var(--subtitle-red);
+}
+.q {
+  padding: 16px 0;
+  border-bottom: var(--hair);
+}
+.q:first-of-type {
+  padding-top: 4px;
+}
+/* A legend ignores the fieldset's padding; floating it makes it lay out like a normal block. */
+.q > legend {
+  float: left;
+  width: 100%;
+}
+.q > legend + * {
+  clear: both;
+}
+.q-label {
+  color: var(--white);
+  font-size: 15px;
+  margin-bottom: 8px;
+  max-width: 90ch;
+}
+.q-help {
+  color: var(--text-muted);
+  font-size: var(--fs-small);
+  margin: -2px 0 10px;
+  max-width: 80ch;
+}
+.q-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.q-options-col {
+  flex-direction: column;
+  align-items: flex-start;
+}
+.q-opt {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 6px 10px;
+  border: var(--hair);
+  cursor: pointer;
+  max-width: 100%;
+}
+.q-opt input {
+  margin: 3px 0 0;
+  accent-color: var(--coral-red);
+  flex: none;
+}
+.q-opt:hover {
+  border-color: var(--menu-red);
+}
+.q-opt:has(input:checked) {
+  border-color: var(--coral-red);
+  background: var(--selected-bg);
+}
+.q-opt:has(input:focus-visible) {
+  outline: 2px solid var(--coral-red);
+  outline-offset: 2px;
+}
+.q-unknown {
+  color: var(--text-muted);
+}
+.q[aria-invalid='true'] .q-label {
+  color: var(--coral-red);
+}
+/* Yes / No / I don't know on one line beside the question */
+.q-inline {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px 16px;
+  align-items: center;
+}
+.q-inline > legend {
+  margin: 0;
+  width: auto;
+}
+.q-inline .q-options {
+  grid-column: 2;
+  flex-wrap: nowrap;
+}
+.q .disclosure {
+  margin-top: 8px;
+}
+.q-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  padding-top: 20px;
+}
+
+/* ---------- Result rows (progressive disclosure) ---------- */
+.counts {
+  margin: 12px 0 0;
+  font-family: var(--font-mono);
+  color: var(--white);
+}
+.phase-group + .phase-group {
+  margin-top: 24px;
+}
+.phase-group > .label {
+  margin-bottom: 4px;
+}
+details.row {
+  border-top: var(--hair);
+}
+details.row:last-child {
+  border-bottom: var(--hair);
+}
+details.row > summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  align-items: baseline;
+  padding: 9px 0;
+}
+details.row > summary:hover {
+  background: var(--hover-bg);
+}
+details.row > summary::before {
+  content: '+';
+  font-family: var(--font-mono);
+  color: var(--subtitle-red);
+  width: 1ch;
+}
+details.row[open] > summary::before {
+  content: '−';
+}
+.row-id {
+  color: var(--text-muted);
+  min-width: 13ch;
+}
+.row-name {
+  color: var(--white);
+  flex: 1 1 280px;
+  min-width: 0;
+}
+.row-meta {
+  color: var(--text-muted);
+  font-size: var(--fs-small);
+}
+.row-body {
+  padding: 4px 0 18px calc(1ch + 14px);
+}
+.disclaimer {
+  color: var(--text-muted);
+  border-top: var(--hair);
+}
+
+@media (max-width: 768px) {
+  .q-inline {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .q-inline > legend {
+    float: none;
+  }
+  .q-inline .q-options {
+    grid-column: 1;
+    flex-wrap: wrap;
+  }
+  .row-id {
+    min-width: 0;
+  }
+  .row-body {
+    padding-left: 0;
+  }
+}
+
+/* ---------- Print: results as a readable document ---------- */
+@media print {
+  :root {
+    --text-muted: #030303;
+    --border-grey: #333333;
+  }
+  html,
+  body {
+    background: #ffffff;
+    color: #030303;
+    font-size: 11px;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  .row-name,
+  .counts,
+  .q-label {
+    color: #030303;
+  }
+  .label {
+    color: #030303;
+  }
+  .shell {
+    display: block;
+    border: 0;
+    background: none;
+  }
+  .shell-side,
+  .skip-link,
+  .no-print,
+  .btn,
+  .segmented {
+    display: none !important;
+  }
+  .hairline-grid > * {
+    background: #ffffff;
+  }
+  details.row > summary::before,
+  .disclosure > summary::before {
+    content: '';
+  }
+  details.row,
+  .phase-group {
+    break-inside: avoid-page;
+  }
+  a {
+    color: #030303;
+    text-decoration: none;
+  }
+  .tag {
+    color: #030303;
+    border-color: #030303;
+  }
+}
