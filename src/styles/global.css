@@ -376,6 +376,7 @@ legend {
 
 /* ---------- Simple tables ---------- */
 .table-scroll {
+  position: relative; /* contains visually hidden link text so it cannot widen the page */
   overflow-x: auto;
   border: var(--hair);
   max-width: 100%;

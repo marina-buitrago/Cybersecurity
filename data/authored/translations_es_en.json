@@ -1146,6 +1146,12 @@
    "es": "Carencias del AI Act",
    "en": "AI Act gaps",
    "status": "proposed"
+  },
+  {
+   "key": "Attacks-phase-standardregulatio!F95",
+   "es": "se contemplan los riesgos que no son fácilmente medibles en un entorno que está constantemente evolucionando. harm to people/harm to an organization/harm to an ecosystem pg5",
+   "en": "Risks that are not easily measurable in a constantly evolving environment are considered: harm to people, harm to an organisation, harm to an ecosystem (p. 5).",
+   "status": "proposed"
   }
  ]
 }

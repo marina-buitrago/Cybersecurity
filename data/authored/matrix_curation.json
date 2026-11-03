@@ -1,0 +1,16 @@
+{
+ "description": "Curation of the JNIC 26 matrix (sheet 'Attacks-phase-standardregulatio') for the page 'How it's implemented'. Cross-references in the AI Act column are resolved to the row they point to; 'found' must match the sheet or the build fails. Status: proposed, pending review.",
+ "crossReferences": [
+  {"row": 33, "found": "Vague and abstract\nsame as before", "target": 32, "note": "'Same as before' points to the previous row, Modify AI Model Architecture."},
+  {"row": 35, "found": "Same as pre-training Datasets", "target": 22, "note": "The Pre-training row 'Datasets'."},
+  {"row": 39, "found": "Already done", "target": 32, "note": "The same technique in Pre-training."},
+  {"row": 40, "found": "Already done", "target": 33, "note": "The same technique in Pre-training."},
+  {"row": 41, "found": "Same as \"Models\" attack", "target": 23, "note": "The Pre-training row 'Models'."},
+  {"row": 47, "found": "Same as AI supply chain compromise (model) or Poison AI Model", "target": 30, "note": "AI supply chain compromise (model); the Poison AI Model rows have no AI Act text."}
+ ],
+ "noProvisionMarkers": ["X", "-"],
+ "textFixes": [
+  {"from": "AESIA (ciberseguridad)", "to": "AESIA (cybersecurity)"},
+  {"from": "AESIA (cibersecurity)", "to": "AESIA (cybersecurity)"}
+ ]
+}

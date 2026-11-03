@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { DataTable } from '../../components/DataTable';
-import { Disclosure, ExternalLink, Segmented, atlasMitigationUrl, atlasTechniqueUrl } from '../../components/ui';
+import { Disclosure, ExternalLink, Segmented, atlasMitigationUrl } from '../../components/ui';
 import { en } from '../../content/en';
 import { aiact, atlas, catalogue, catalogueDocs, phaseOrder } from '../../engine/data';
-import { variablesOf, parse } from '../../engine/expr';
 import { QUESTIONS } from '../../engine/questionnaire';
-import type { Control, Technique } from '../../engine/types';
+import type { Control } from '../../engine/types';
+import { MatrixTab } from './MatrixTab';
 
 const H = en.how.cyber;
 type Tab = keyof typeof H.tabs;
@@ -156,48 +156,6 @@ function ControlsTab() {
   );
 }
 
-const conditionFlags = (t: Technique) => variablesOf(parse(t.appliesWhen, FLAG_SET));
-
-function TechniquesTab() {
-  return (
-    <DataTable<Technique>
-      caption={H.tabs.techniques}
-      rows={catalogue.techniques}
-      rowKey={(t) => t.id}
-      filters={[
-        { label: H.filters.phase, values: (t) => t.phases, order: phaseOrder },
-        { label: H.filters.tactic, values: (t) => t.tactics },
-        { label: H.filters.condition, values: conditionFlags },
-      ]}
-      columns={[
-        {
-          header: H.techCols.id,
-          text: (t) => t.id,
-          render: (t) => (
-            <ExternalLink href={t.jnic.link ?? atlasTechniqueUrl(t.id)}>
-              <span className="mono">{t.id}</span>
-            </ExternalLink>
-          ),
-        },
-        { header: H.techCols.name, text: (t) => t.nameAtlas, minWidth: 180 },
-        { header: H.techCols.nameMatrix, text: (t) => t.nameMatrix, minWidth: 180 },
-        { header: H.techCols.tactic, text: (t) => join(t.tactics), minWidth: 140 },
-        { header: H.techCols.phases, text: (t) => t.phases.join(' · '), minWidth: 150 },
-        { header: H.techCols.inAtlas, text: (t) => (t.inAtlas ? H.yes : H.no) },
-        { header: H.techCols.appliesWhen, text: (t) => t.appliesWhen, mono: true, minWidth: 200 },
-        { header: H.techCols.prep, text: (t) => (t.attackerPreparation ? H.yes : H.no) },
-        { header: H.techCols.mitigations, text: (t) => join(t.atlasMitigations), mono: true, long: true, minWidth: 160 },
-        { header: H.techCols.controlsAtlas, text: (t) => join(t.controlsAtlas), mono: true, long: true, minWidth: 150 },
-        { header: H.techCols.controlsProposed, text: (t) => join(t.controlsProposed), mono: true, long: true, minWidth: 150 },
-        { header: H.techCols.colJ, text: (t) => t.jnic.matrixMitigation.join('\n\n'), long: true, minWidth: 320 },
-        { header: H.techCols.coverage, text: (t) => t.jnic.coverageRaw.map((c) => c.text).join('\n\n'), long: true, minWidth: 280 },
-        { header: H.techCols.nist, text: (t) => join(t.nist), mono: true, long: true, minWidth: 150 },
-        { header: H.techCols.notes, text: (t) => t.notes.join('\n'), long: true, minWidth: 240 },
-      ]}
-    />
-  );
-}
-
 // ------------------------------------------------------------ ATLAS, legal, gaps
 function AtlasTab() {
   return (
@@ -335,7 +293,7 @@ function GapsTab() {
 }
 
 export function HowCyber() {
-  const [tab, setTab] = useState<Tab>('logic');
+  const [tab, setTab] = useState<Tab>('matrix');
   const premise = aiact.premise.filter((p) => [2, 6, 7].includes(p.row)).map((p) => p.text);
   const built = catalogueDocs.readme.sections.find((s) => s.title === 'How it was built');
   const others = catalogueDocs.readme.sections.filter((s) => s.title !== 'How it was built' && s.title !== 'Sources');
@@ -394,9 +352,9 @@ export function HowCyber() {
         <div className="section-head">
           <Segmented<Tab> label={H.tabsLabel} value={tab} onChange={setTab} options={(Object.keys(H.tabs) as Tab[]).map((t) => ({ value: t, label: H.tabs[t] }))} />
         </div>
+        {tab === 'matrix' && <MatrixTab />}
         {tab === 'logic' && <LogicTab />}
         {tab === 'controls' && <ControlsTab />}
-        {tab === 'techniques' && <TechniquesTab />}
         {tab === 'atlas' && <AtlasTab />}
         {tab === 'legal' && <LegalTab />}
         {tab === 'gaps' && <GapsTab />}

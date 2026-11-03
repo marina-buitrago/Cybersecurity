@@ -3,7 +3,6 @@ import { PageHead, Shell } from '../../components/Shell';
 import { Segmented, Tag } from '../../components/ui';
 import { fmtDate } from '../../components/format';
 import { en } from '../../content/en';
-import { glossary } from '../../content/glossary';
 import { catalogue, catalogueDocs } from '../../engine/data';
 import { CANDIDATE_REGIMES, DEADLINE_RULES, type Duration } from '../../engine/deadlines';
 import { knowledge } from '../../engine/dpo';
@@ -175,53 +174,6 @@ function HowSources() {
           ))}
         </ul>
       </section>
-      <section className="section">
-        <h2 className="label">{S.glossaryTitle}</h2>
-        <div className="table-scroll">
-          <table className="table">
-            <thead>
-              <tr>
-                <th scope="col">{S.glossaryCols.es}</th>
-                <th scope="col">{S.glossaryCols.en}</th>
-                <th scope="col">{S.glossaryCols.note}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {glossary.map((g) => (
-                <tr key={g.es}>
-                  <td lang="es">{g.es}</td>
-                  <td>{g.en}</td>
-                  <td className="muted">{g.note ?? ''}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
-    </>
-  );
-}
-
-function HowLimits() {
-  const L = H.limits;
-  return (
-    <>
-      <section className="section">
-        <h2 className="label">{L.title}</h2>
-        <ul className="readable">
-          {L.items.map((i) => (
-            <li key={i}>{i}</li>
-          ))}
-        </ul>
-      </section>
-      <section className="section">
-        <h2 className="label">{L.proposedTitle}</h2>
-        <ul className="readable">
-          {L.proposed.map((i) => (
-            <li key={i}>{i}</li>
-          ))}
-        </ul>
-      </section>
     </>
   );
 }
@@ -243,7 +195,6 @@ export function HowPage() {
       {section === 'cyber' && <HowCyber />}
       {section === 'dpo' && <HowDpo />}
       {section === 'sources' && <HowSources />}
-      {section === 'limits' && <HowLimits />}
     </Shell>
   );
 }

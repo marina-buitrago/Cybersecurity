@@ -119,7 +119,6 @@ export function Questionnaire() {
           next();
         }}
       >
-        {step === 3 && <p className="small muted readable">{en.cyber.proposedWording}</p>}
         {questions.map((q) => (
           <Question key={q.id} q={q} value={answers[q.id]} onChange={(v) => setAnswer(q.id, v)} showMissing={showMissing} />
         ))}

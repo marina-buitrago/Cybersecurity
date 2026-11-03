@@ -26,6 +26,11 @@ Sources: `ai_security_controls_catalogue.xlsx` (Version 0.1 · 3 November 2026 �
 
 - JNIC row 8: no ATLAS link in column C ('Acquire Infrastructure: AI Development Workspaces '); resolved by name to AML.T0008.000
 
+## Technique conditions refined (proposed)
+
+- AML.T0052.000: 'always' → 'generative'. The technique turns a language model into a social engineer that converses with users, so it needs a generative system.
+- AML.T0073: 'always' → 'generative || identity_verification'. Impersonation reaches the system through generated content or by deceiving identity verification; a non-generative system that does not verify identity is not exposed.
+
 ## Matrix phase labels not recognised
 
 - None after normalisation.
@@ -57,7 +62,17 @@ Sources: `ai_security_controls_catalogue.xlsx` (Version 0.1 · 3 November 2026 �
 
 ## AI Act coverage (JNIC column D)
 
-- Filled in 41 of 135 rows ('X' ×2, '-' ×4). 28 of 123 techniques have informative text; the rest show 'Pending validation' ('X', '-', empty cells and cross-references such as 'Already done' or 'Same as …').
+- Filled in 41 of 135 rows ('X' ×2, '-' ×4). Cross-references ('Already done', 'Same as …') are resolved in the curated matrix (below).
+- 32 of 123 techniques have AI Act text after curation; the assessment results show it and omit the field for the rest.
+
+## Curated JNIC matrix
+
+- 135 matrix rows → 132 curated rows (3 repeated technique–phase rows merged); sorted by phase. Phase labels normalised (see below); names as in ATLAS 2026.10.
+- AI Act column: text from the matrix ×29, cross-reference resolved ×6, taken from the same technique in another phase ×1, 'X' or '-' (no provision identified) ×6, empty ×90. Every row also lists the legal citations reached through its catalogue controls.
+- Filled from the same technique in another phase: AI Act ×1, nistRmf ×3, whyNist ×3, nist600 ×3, softLaw ×1.
+- NIST AI 600-1 actions normalised to the form 'MS-2.7-007'; taken from the catalogue where the matrix is empty ×0.
+- MITRE mitigations: the outdated column J is replaced by the ATLAS 2026.10 mitigations of the catalogue; the matrix's own proposals are kept ×2.
+- Completed from the catalogue: tactic, condition, ATLAS 2026.10 mitigations, controls and legal citations.
 
 ## Catalogue Summary sheet recomputed from rows
 
@@ -75,14 +90,14 @@ Sources: `ai_security_controls_catalogue.xlsx` (Version 0.1 · 3 November 2026 �
 - Hoja 8 defines 7 phases (Design, Pre-training, Fine-tuning and alignment, Evaluation, Deployment, Monitoring, Update); no definition for Development and Monitoring, End of life (shown as 'Pending validation'). It lists the four typologies by name only, without definitions.
 - Global - AI Act: the row 'Art. 6 RIA' has no class (shown as 'Pending validation'); 'Abtracta' read as Abstract.
 - AI Act Gaps row 4: the article cell holds an Excel date (2026-08-02); displayed as 'Art. 2(8) AI Act' (confirmed by the project owner, 2026-11-03).
-- The JNIC matrix column J (mitigation) is outdated: shown only in 'How it's implemented'.
+- The JNIC matrix column J (mitigation) is outdated: replaced by ATLAS 2026.10 mitigations in the curated matrix.
 - Controls 'Phases' cells use ' · ' as separator; the source files use spaces in their names.
 - README: 1 line naming an internal, unpublishable file was not ingested.
 - Not ingested: sheet 'AI Act V. Standards' (contains a private draft standard), the JNIC copy without '-2' and the older draft workbook.
 
 ## Language and forbidden content
 
-- Translated cells: 191 (data/authored/translations_es_en.json, status: proposed).
+- Translated cells: 192 (data/authored/translations_es_en.json, status: proposed).
 - Strings that look untranslated: 0
 
 ## Name-like text not present in the source files

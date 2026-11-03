@@ -216,6 +216,40 @@ describe('Other rules', () => {
     const retired = r.techniques.find((t) => t.id === 'AML.T0019');
     expect(retired?.controls.length).toBeGreaterThan(0);
   });
+  it('lists a control only when a risk of this system calls for it', () => {
+    // ACC-08 (condition "always") mitigates only Exploit Public-Facing Application in the matrix.
+    expect(ctrlIds(run(answers({ access: ['authenticated'] })))).not.toContain('ACC-08');
+    expect(ctrlIds(run(answers({ access: ['public'] })))).toContain('ACC-08');
+    // INV-03 (generative || agent) mitigates only Modify AI Agent Configuration (agent).
+    expect(ctrlIds(run(answers({ typology: 'llm' })))).not.toContain('INV-03');
+    expect(ctrlIds(run(answers({ typology: 'agentic' })))).toContain('INV-03');
+    for (const c of run(answers({})).controls) {
+      if (c.basis === 'risks') expect(c.techniques.length, c.id).toBeGreaterThan(0);
+    }
+  });
+  it('keeps cross-cutting controls and controls tied only to newer ATLAS techniques', () => {
+    const r = run(answers({ typology: 'agentic' }));
+    expect(r.controls.find((c) => c.id === 'GOV-01')?.basis).toBe('crossCutting');
+    expect(r.controls.find((c) => c.id === 'AGT-09')?.basis).toBe('newerAtlas');
+    expect(r.controls.find((c) => c.id === 'AGT-09')?.newerAtlas.length).toBeGreaterThan(0);
+  });
+  it('applies the proposed condition refinements', () => {
+    const predictive = techIds(run(answers({ typology: 'predictive' })));
+    expect(predictive).not.toContain('AML.T0052.000');
+    expect(predictive).not.toContain('AML.T0073');
+    expect(techIds(run(answers({ typology: 'predictive', identity_verification: 'yes' })))).toContain('AML.T0073');
+    expect(techIds(run(answers({ typology: 'llm' })))).toEqual(expect.arrayContaining(['AML.T0052.000', 'AML.T0073']));
+    expect(ctrlIds(run(answers({ typology: 'predictive' })))).not.toContain('PPL-02');
+  });
+  it('separates baseline items from those specific to the answers', () => {
+    const a = run(answers({ typology: 'predictive' }));
+    const b = run(answers({ typology: 'agentic', tools: 'write', rag: 'yes', access: ['public'] }));
+    const baseline = (r: AssessmentResult) => r.controls.filter((c) => c.scope === 'baseline').map((c) => c.id).sort();
+    expect(baseline(a)).toEqual(baseline(b));
+    expect(a.controls.find((c) => c.id === 'MOD-01')?.scope).toBe('specific');
+    expect(b.controls.find((c) => c.id === 'AGT-04')?.scope).toBe('specific');
+    expect(a.techniques.filter((t) => t.scope === 'baseline').every((t) => t.technique.appliesWhen === 'always')).toBe(true);
+  });
   it('lists a control under the earliest phase the organisation controls', () => {
     const r = run(answers({ phases: ['deployment', 'monitoring'] }));
     expect(r.controls.find((c) => c.id === 'GOV-04')?.phase).toBe('Deployment');

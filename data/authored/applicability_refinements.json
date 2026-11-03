@@ -1,0 +1,19 @@
+{
+ "description": "Proposed refinements of the catalogue's technique conditions ('Applies when (flags, proposed)'). Each entry records the catalogue value it replaces; the build fails if that value changes in the catalogue. Status: proposed, pending review.",
+ "techniques": [
+  {
+   "id": "AML.T0052.000",
+   "catalogue": "always",
+   "proposed": "generative",
+   "why": "The technique turns a language model into a social engineer that converses with users, so it needs a generative system.",
+   "status": "proposed"
+  },
+  {
+   "id": "AML.T0073",
+   "catalogue": "always",
+   "proposed": "generative || identity_verification",
+   "why": "Impersonation reaches the system through generated content or by deceiving identity verification; a non-generative system that does not verify identity is not exposed.",
+   "status": "proposed"
+  }
+ ]
+}

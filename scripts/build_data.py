@@ -4,7 +4,8 @@
 Reads ONLY these two files (by exact name) from data/source/:
   A. ai_security_controls_catalogue.xlsx                      -> canonical for all logic
   B. JNIC 26 - Tech-legal alignment in AI security-2.xlsx      -> technique content, help text, AI Act obligations
-plus the authored inputs in data/authored/ (translations, obligation rules, corrections), all marked "proposed".
+plus the authored inputs in data/authored/ (translations, obligation rules, corrections, technique condition
+refinements, matrix curation), all marked "proposed".
 
 Writes src/data/*.json and reports/data-quality.md.
 Exits with status 1 on any blocking problem (unknown flag token, missing or outdated translation,
@@ -341,9 +342,24 @@ for r in tech_rows:
         "matrixMitigationStatus": clean(t["matrixMitigation"]),
         "controlsAtlas": split_list(t["controlsAtlas"]), "controlsProposed": split_list(t["controlsProposed"]),
         "nist": split_list(t["nist"]), "attackerPreparation": clean(t["prep"]) == "Yes",
-        "appliesWhen": clean(t["appliesWhen"]), "notes": lines(t["notes"]),
+        "appliesWhen": clean(t["appliesWhen"]), "notes": lines(t["notes"]), "jnic_coverage": None,
     })
 TECH_IDS = [t["id"] for t in techniques]
+
+# ---- Proposed refinements of technique conditions (data/authored/applicability_refinements.json)
+refine_report = section("Technique conditions refined (proposed)")
+tech_by_id = {t["id"]: t for t in techniques}
+for ref in load_json("applicability_refinements.json")["techniques"]:
+    t = tech_by_id.get(ref["id"])
+    if t is None:
+        errors.append(f"Condition refinement for unknown technique {ref['id']}")
+    elif t["appliesWhen"] != ref["catalogue"]:
+        errors.append(f"Condition refinement for {ref['id']} expects catalogue value {ref['catalogue']!r}, "
+                      f"catalogue has {t['appliesWhen']!r}")
+    else:
+        t["appliesWhenCatalogue"] = t["appliesWhen"]
+        t["appliesWhen"] = ref["proposed"]
+        refine_report.append(f"{ref['id']}: '{ref['catalogue']}' → '{ref['proposed']}'. {ref['why']}")
 
 # ---- Legal basis
 h, legal_rows = sheet_rows(wbA["Legal basis"])
@@ -439,42 +455,27 @@ for i, r in enumerate(ws.iter_rows(min_row=3, values_only=True), start=3):
             f"JNIC row {i}: no ATLAS link in column C ({(link or '')[:50]!r}); "
             + (f"resolved by name to {tid}" if tid else "could not be resolved"))
     attack_rows.append({"row": i, "phase": phase, "name": clean(r[1]), "id": tid, "link": link if m else None,
-                        "coverage": clean(r[3]), "why": clean(r[4]), "mitigation": clean(r[9]), "description": clean(r[11])})
+                        "coverage": clean(r[3]), "why": clean(r[4]), "softLaw": clean(r[5]), "nistRmf": clean(r[6]),
+                        "whyNist": clean(r[7]), "nist600": clean(r[8]), "mitigation": clean(r[9]),
+                        "description": clean(r[11])})
 rows_read.append(f"JNIC · Attacks-phase-standardregulatio: {len(attack_rows)} data rows "
                  f"({len({a['id'] for a in attack_rows if a['id']})} unique technique IDs)")
 for u in unresolved:
     errors.append(u)
 
-COVERAGE_PENDING = re.compile(r"^(x|-|–|already done)$|^same as|same as before", re.I)
-
-
-def informative(cov: str | None) -> str | None:
-    if cov is None:
-        return None
-    s = cov.lstrip(". ").strip()
-    return None if COVERAGE_PENDING.search(s) else s
-
-
 jnic = {}
 for a in attack_rows:
     if not a["id"]:
         continue
-    j = jnic.setdefault(a["id"], {"phases": [], "names": [], "description": None, "coverage": None,
-                                  "coverageRaw": [], "whyAiAct": None, "matrixMitigation": [], "link": None})
+    j = jnic.setdefault(a["id"], {"phases": [], "names": [], "description": None, "whyAiAct": None, "link": None})
     if a["phase"] and a["phase"] not in j["phases"]:
         j["phases"].append(a["phase"])
     if a["name"] and a["name"] not in j["names"]:
         j["names"].append(a["name"])
     if a["description"] and (j["description"] is None or len(a["description"]) > len(j["description"])):
         j["description"] = a["description"]
-    if a["coverage"]:
-        j["coverageRaw"].append({"phase": a["phase"], "text": a["coverage"]})
-        if j["coverage"] is None:
-            j["coverage"] = informative(a["coverage"])
     if a["why"] and j["whyAiAct"] is None:
         j["whyAiAct"] = a["why"]
-    if a["mitigation"] and a["mitigation"] not in j["matrixMitigation"]:
-        j["matrixMitigation"].append(a["mitigation"])
     j["link"] = j["link"] or a["link"]
 
 # ---- Hoja 8: phase definitions (rows "N) Phase" followed by the definition)
@@ -710,10 +711,189 @@ for c in controls:
 cov = section("AI Act coverage (JNIC column D)")
 filled = sum(1 for a in attack_rows if a["coverage"])
 vals = Counter(a["coverage"] for a in attack_rows if a["coverage"] in ("X", "-"))
-with_text = sum(1 for t in techniques if jnic.get(t["id"], {}).get("coverage"))
 cov.append(f"Filled in {filled} of {len(attack_rows)} rows ('X' ×{vals.get('X', 0)}, '-' ×{vals.get('-', 0)}). "
-           f"{with_text} of {len(techniques)} techniques have informative text; the rest show 'Pending validation' "
-           "('X', '-', empty cells and cross-references such as 'Already done' or 'Same as …').")
+           "Cross-references ('Already done', 'Same as …') are resolved in the curated matrix (below).")
+
+# ---- Curated JNIC matrix (page "How it's implemented"; curation in data/authored/matrix_curation.json)
+curation = load_json("matrix_curation.json")
+cur = section("Curated JNIC matrix")
+row_by_num = {a["row"]: a for a in attack_rows}
+mit_name = {m["id"]: m["name"] for m in atlas_mitigations}
+ctrl_by_id = {c["id"]: c for c in controls}
+NO_PROVISION = set(curation["noProvisionMarkers"])
+# Section titles of the NIST AI RMF 1.0 cited in column G (titles as in the framework).
+NIST_RMF_SECTIONS = {
+    "1.2.1": "Risk Measurement", "1.2.4": "Organizational Integration and Management of Risk",
+    "3.1": "Valid and Reliable", "3.2": "Safe", "3.3": "Secure and Resilient",
+    "3.4": "Accountable and Transparent", "3.6": "Privacy-Enhanced",
+}
+RE_NIST_SECTION = re.compile(r"(?<![\d.])(\d\.\d(?:\.\d)?)\s+(?=[A-Z])")
+RE_NIST_ACTION = re.compile(r"\b(GV|MP|MS|MG)\s*-?\s*(\d+\.\d+)\s*-\s*(\d{3})\b")
+
+
+def fix_text(v: str | None) -> str | None:
+    """Curated prose: known label fixes, stray leading punctuation, capital first letter."""
+    if v is None:
+        return None
+    for f in curation["textFixes"]:
+        v = v.replace(f["from"], f["to"])
+    v = v.lstrip(". ").strip()
+    return (v[:1].upper() + v[1:]) or None
+
+
+xref = {}
+for x in curation["crossReferences"]:
+    a = row_by_num.get(x["row"])
+    if a is None or a["coverage"] != clean(x["found"]):
+        errors.append(f"Matrix curation: row {x['row']} expects {x['found']!r}, sheet has {a and a['coverage']!r}")
+    elif x["target"] not in row_by_num:
+        errors.append(f"Matrix curation: row {x['row']} points to missing row {x['target']}")
+    else:
+        xref[x["row"]] = x["target"]
+
+
+def resolve_coverage(rownum: int, seen: tuple = ()) -> tuple[str | None, int]:
+    if rownum in xref:
+        if rownum in seen:
+            errors.append(f"Matrix curation: circular cross-reference at row {rownum}")
+            return None, rownum
+        return resolve_coverage(xref[rownum], seen + (rownum,))
+    return row_by_num[rownum]["coverage"], rownum
+
+
+def nist_actions(v: str | None) -> tuple[list[str], str | None]:
+    if v is None:
+        return [], None
+    ids = [f"{m[1]}-{m[2]}-{m[3]}" for m in RE_NIST_ACTION.finditer(v)]
+    rest = RE_NIST_ACTION.sub("", v).replace(",", " ").strip()
+    if rest and rest.lower() != "no direct action":
+        cur.append(f"Column I text kept as a note: {rest[:60]!r}")
+    return list(dict.fromkeys(ids)), ("No direct action" if rest.lower() == "no direct action" else rest or None)
+
+
+def nist_sections(v: str | None) -> list[str]:
+    out = []
+    for m in RE_NIST_SECTION.finditer(v or ""):
+        num = m.group(1)
+        if num not in NIST_RMF_SECTIONS:
+            errors.append(f"Unknown NIST AI RMF section {num} in matrix column G")
+            continue
+        label = f"{num} {NIST_RMF_SECTIONS[num]}"
+        if label not in out:
+            out.append(label)
+    return out
+
+
+# 1. Merge rows that repeat the same technique in the same phase (empty cells filled from the repeat).
+FIELDS = ("coverage", "why", "softLaw", "nistRmf", "whyNist", "nist600", "mitigation", "description")
+merged: "OrderedDict[tuple, dict]" = OrderedDict()
+n_merged = 0
+for a in sorted((a for a in attack_rows if a["id"]), key=lambda a: (PHASES.index(a["phase"]), a["row"])):
+    key = (a["phase"], a["id"])
+    if key in merged:
+        n_merged += 1
+        first = merged[key]
+        for f in FIELDS:
+            if first[f] is None and a[f] is not None:
+                first[f] = a[f]
+        first["rows"].append(a["row"])
+    else:
+        merged[key] = dict(a, rows=[a["row"]])
+
+# 2. Per row: AI Act text (cross-references resolved), then fill gaps from the same technique's other rows.
+for m in merged.values():
+    text, src = resolve_coverage(m["row"]) if m["coverage"] else (None, m["row"])
+    m["aiActSrc"] = src
+    m["aiActText"] = text
+    m["aiActOrigin"] = ("noProvision" if text in NO_PROVISION else "crossReference" if src != m["row"] else "matrix") if text else "none"
+    m["whyAiAct"] = m["why"] or (row_by_num[src]["why"] if src != m["row"] else None)
+by_tech: dict[str, list[dict]] = {}
+for m in merged.values():
+    by_tech.setdefault(m["id"], []).append(m)
+n_prop = Counter()
+for m in merged.values():
+    others = [o for o in by_tech[m["id"]] if o is not m]
+    if m["aiActOrigin"] in ("none", "noProvision"):
+        donor = next((o for o in others if o["aiActOrigin"] in ("matrix", "crossReference")), None)
+        if donor:
+            m.update(aiActText=donor["aiActText"], aiActSrc=donor["aiActSrc"], aiActOrigin="sameTechnique",
+                     whyAiAct=m["whyAiAct"] or donor["whyAiAct"])
+            n_prop["AI Act"] += 1
+    for f in ("softLaw", "nistRmf", "whyNist", "nist600", "description"):
+        if m[f] is None:
+            donor = next((o for o in others if o[f] is not None), None)
+            if donor:
+                m[f] = donor[f]
+                m[f + "From"] = donor["phase"]
+                n_prop[f] += 1
+
+# 3. Assemble, completing from the catalogue.
+jnic_matrix = []
+for m in merged.values():
+    t = tech_by_id[m["id"]]
+    soft = tr(f"Attacks-phase-standardregulatio!F{m['rows'][0]}", m["softLaw"]) \
+        if f"Attacks-phase-standardregulatio!F{m['rows'][0]}" in TRANSLATIONS else m["softLaw"]
+    actions, action_note = nist_actions(m["nist600"])
+    nist_origin = "matrix" if m["nist600"] else "none"
+    if not actions and not action_note and t["nist"]:
+        actions, nist_origin = list(t["nist"]), "catalogue"
+    proposal = None
+    if m["mitigation"]:
+        pm = re.search(r"(?:Possible mitigation|Proposed mitigation \(no mitigation in mitre\))\s*:\s*(.+)$",
+                       m["mitigation"], re.S)
+        proposal = fix_text(pm.group(1)) if pm else None
+    links = [(cid, "atlas") for cid in t["controlsAtlas"]] + [(cid, "proposed") for cid in t["controlsProposed"]]
+    legal_via: "OrderedDict[str, dict]" = OrderedDict()
+    for cid, _ in links:
+        for l in ctrl_by_id[cid]["legal"]:
+            if "citation" not in l:
+                continue
+            e = legal_via.setdefault(l["citation"], {"citation": l["citation"], "condition": l["condition"], "controls": []})
+            e["controls"].append(cid)
+    src = row_by_num[m["aiActSrc"]]
+    successor = next((n.split("probable successor (to verify):", 1)[1].strip() for n in t["notes"]
+                      if "probable successor (to verify):" in n), None)
+    jnic_matrix.append({
+        "phase": m["phase"], "id": t["id"], "name": t["nameAtlas"] or t["nameMatrix"], "inAtlas": t["inAtlas"],
+        "successor": successor, "tactics": t["tactics"], "attackerPreparation": t["attackerPreparation"],
+        "appliesWhen": t["appliesWhen"], "appliesWhenCatalogue": t.get("appliesWhenCatalogue"),
+        "description": fix_text(m["description"]),
+        "aiAct": {
+            "text": None if m["aiActOrigin"] in ("none", "noProvision") else fix_text(m["aiActText"]),
+            "origin": m["aiActOrigin"],
+            "from": None if m["aiActOrigin"] not in ("crossReference", "sameTechnique") else
+            {"id": src["id"], "phase": src["phase"], "name": tech_by_id[src["id"]]["nameAtlas"] or src["name"]},
+        },
+        "whyAiAct": fix_text(m["whyAiAct"]),
+        "softLaw": fix_text(soft),
+        "nistRmf": {"sections": nist_sections(m["nistRmf"]), "text": fix_text(m["nistRmf"])},
+        "whyNist": fix_text(m["whyNist"]),
+        "nist600": {"actions": actions, "note": action_note, "origin": nist_origin},
+        "mitigations": [{"id": mid, "name": mit_name.get(mid)} for mid in t["atlasMitigations"]],
+        "matrixProposal": proposal,
+        "controls": [{"id": cid, "name": ctrl_by_id[cid]["name"], "link": link} for cid, link in links],
+        "legalViaControls": list(legal_via.values()),
+        "filledFrom": {f: m[f + "From"] for f in ("description", "softLaw", "nistRmf", "whyNist", "nist600")
+                       if m.get(f + "From")},
+    })
+    if m["aiActOrigin"] in ("matrix", "crossReference", "sameTechnique") and not t["jnic_coverage"]:
+        t["jnic_coverage"] = fix_text(m["aiActText"])
+
+origins = Counter(r["aiAct"]["origin"] for r in jnic_matrix)
+cur.append(f"{len(attack_rows)} matrix rows → {len(jnic_matrix)} curated rows ({n_merged} repeated technique–phase "
+           "rows merged); sorted by phase. Phase labels normalised (see below); names as in ATLAS 2026.10.")
+cur.append(f"AI Act column: text from the matrix ×{origins['matrix']}, cross-reference resolved ×{origins['crossReference']}, "
+           f"taken from the same technique in another phase ×{origins['sameTechnique']}, 'X' or '-' (no provision "
+           f"identified) ×{origins['noProvision']}, empty ×{origins['none']}. Every row also lists the legal citations "
+           "reached through its catalogue controls.")
+cur.append("Filled from the same technique in another phase: " + ", ".join(f"{k} ×{v}" for k, v in n_prop.items()) + ".")
+cur.append(f"NIST AI 600-1 actions normalised to the form 'MS-2.7-007'; taken from the catalogue where the matrix is empty "
+           f"×{sum(1 for r in jnic_matrix if r['nist600']['origin'] == 'catalogue')}.")
+cur.append("MITRE mitigations: the outdated column J is replaced by the ATLAS 2026.10 mitigations of the catalogue; "
+           f"the matrix's own proposals are kept ×{sum(1 for r in jnic_matrix if r['matrixProposal'])}.")
+cur.append("Completed from the catalogue: tactic, condition, ATLAS 2026.10 mitigations, controls and legal citations.")
+cov.append(f"{sum(1 for t in techniques if t['jnic_coverage'])} of {len(techniques)} techniques have AI Act text after "
+           "curation; the assessment results show it and omit the field for the rest.")
 
 # ---- summary recomputation
 summ = section("Catalogue Summary sheet recomputed from rows")
@@ -750,7 +930,7 @@ other.append(f"Hoja 8 defines {len(phase_definitions)} phases ({', '.join(phase_
 other.append("Global - AI Act: the row 'Art. 6 RIA' has no class (shown as 'Pending validation'); 'Abtracta' read as Abstract.")
 other.append("AI Act Gaps row 4: the article cell holds an Excel date (2026-08-02); displayed as 'Art. 2(8) AI Act' "
              "(confirmed by the project owner, 2026-11-03).")
-other.append("The JNIC matrix column J (mitigation) is outdated: shown only in 'How it's implemented'.")
+other.append("The JNIC matrix column J (mitigation) is outdated: replaced by ATLAS 2026.10 mitigations in the curated matrix.")
 other.append("Controls 'Phases' cells use ' · ' as separator; the source files use spaces in their names.")
 if dropped_readme:
     other.append(f"README: {len(dropped_readme)} line naming an internal, unpublishable file was not ingested.")
@@ -774,9 +954,8 @@ catalogue = {
 }
 for t in techniques:
     j = jnic.get(t["id"], {})
-    t["jnic"] = {"names": j.get("names", []), "description": j.get("description"), "coverage": j.get("coverage"),
-                 "coverageRaw": j.get("coverageRaw", []), "whyAiAct": j.get("whyAiAct"),
-                 "matrixMitigation": j.get("matrixMitigation", []), "link": j.get("link")}
+    t["jnic"] = {"names": j.get("names", []), "description": fix_text(j.get("description")),
+                 "coverage": t.pop("jnic_coverage"), "whyAiAct": j.get("whyAiAct"), "link": j.get("link")}
 atlas = {"mitigations": atlas_mitigations, "outside": atlas_outside}
 aiact = {
     "premise": premise, "riskTable": risk_table, "obligations": obligations,
@@ -785,7 +964,8 @@ aiact = {
 }
 docs = {"readme": {"title": readme_title, "version": readme_version, "sections": readme_sections},
         "summary": {"families": summary_families, "figures": summary_figures}}
-outputs = {"catalogue.json": catalogue, "atlas.json": atlas, "aiact.json": aiact, "catalogue-docs.json": docs}
+outputs = {"catalogue.json": catalogue, "atlas.json": atlas, "aiact.json": aiact, "catalogue-docs.json": docs,
+           "jnic-matrix.json": {"rows": jnic_matrix}}
 
 
 def walk_strings(o, path="$"):

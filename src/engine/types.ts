@@ -63,10 +63,9 @@ export interface Control {
 export interface JnicContent {
   names: string[];
   description: string | null;
+  /** AI Act text of the curated matrix (cross-references resolved); null when the matrix has none. */
   coverage: string | null;
-  coverageRaw: { phase: string; text: string }[];
   whyAiAct: string | null;
-  matrixMitigation: string[];
   link: string | null;
 }
 
@@ -85,6 +84,8 @@ export interface Technique {
   nist: string[];
   attackerPreparation: boolean;
   appliesWhen: string;
+  /** Catalogue value replaced by a proposed refinement (data/authored/applicability_refinements.json). */
+  appliesWhenCatalogue?: string;
   notes: string[];
   jnic: JnicContent;
 }
@@ -178,4 +179,34 @@ export interface CatalogueDocs {
     families: { family: string; controls: number; withAtlasLink: number }[];
     figures: { label: string; value: number }[];
   };
+}
+
+/** One row of the curated JNIC matrix (src/data/jnic-matrix.json). */
+export interface JnicMatrixRow {
+  phase: string;
+  id: string;
+  name: string;
+  inAtlas: boolean;
+  successor: string | null;
+  tactics: string[];
+  attackerPreparation: boolean;
+  appliesWhen: string;
+  appliesWhenCatalogue: string | null;
+  description: string | null;
+  aiAct: {
+    text: string | null;
+    origin: 'matrix' | 'crossReference' | 'sameTechnique' | 'noProvision' | 'none';
+    from: { id: string; phase: string; name: string } | null;
+  };
+  whyAiAct: string | null;
+  softLaw: string | null;
+  nistRmf: { sections: string[]; text: string | null };
+  whyNist: string | null;
+  nist600: { actions: string[]; note: string | null; origin: 'matrix' | 'catalogue' | 'none' };
+  mitigations: { id: string; name: string | null }[];
+  matrixProposal: string | null;
+  controls: { id: string; name: string; link: 'atlas' | 'proposed' }[];
+  legalViaControls: { citation: string; condition: string; controls: string[] }[];
+  /** Cells filled from the same technique's row in another phase (field -> that phase). */
+  filledFrom: Partial<Record<'description' | 'softLaw' | 'nistRmf' | 'whyNist' | 'nist600', string>>;
 }

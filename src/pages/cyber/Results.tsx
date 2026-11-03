@@ -5,22 +5,21 @@ import {
   Disclosure,
   ExternalLink,
   MoreText,
-  Pending,
   Segmented,
-  Tag,
   TbcTag,
   atlasMitigationUrl,
   atlasTechniqueUrl,
   downloadJson,
 } from '../../components/ui';
 import { en } from '../../content/en';
-import type { AssessmentResult, ControlResult, LegalResult, TechniqueResult } from '../../engine/assess';
-import { catalogue, controlById, flagById, phaseOrder, techniqueById } from '../../engine/data';
+import type { AssessmentResult, ControlResult, TechniqueResult } from '../../engine/assess';
+import { atlas, catalogue, controlById, flagById, phaseOrder, techniqueById } from '../../engine/data';
 import { QUESTION_BY_ID, UNKNOWN, isStepComplete, type Answers } from '../../engine/questionnaire';
 import { createLocalAssessmentService } from '../../engine/service';
 import { useAnswers } from './state';
 
 const service = createLocalAssessmentService();
+const newerAtlasById = new Map(atlas.outside.map((o) => [o.id, o]));
 const R = en.cyber.results;
 type View = 'controls' | 'attacks';
 
@@ -65,94 +64,68 @@ function WhyApplies({ why, unknown }: { why: string[]; unknown: Set<string> }) {
   );
 }
 
-function LinkKindTag({ link }: { link: 'atlas' | 'proposed' }) {
-  return link === 'atlas' ? <Tag kind="filled">{R.linkAtlas}</Tag> : <Tag>{R.linkProposed}</Tag>;
-}
+const techniqueName = (id: string) => {
+  const t = techniqueById.get(id);
+  return t?.nameAtlas ?? t?.nameMatrix ?? newerAtlasById.get(id)?.name ?? '';
+};
 
-function LegalLine({ l }: { l: LegalResult }) {
+/** Technique ID, linked to ATLAS when the ID exists in ATLAS 2026.10. */
+function TechniqueId({ id }: { id: string }) {
+  const t = techniqueById.get(id);
+  if (t && !t.inAtlas) return <span className="mono">{id}</span>;
   return (
-    <li>
-      {l.citation} · {R.legalIf} {l.condition} · {l.concreteness} {l.tbc && <TbcTag />}
-    </li>
+    <ExternalLink href={atlasTechniqueUrl(id)}>
+      <span className="mono">{id}</span>
+    </ExternalLink>
   );
 }
 
-function Provenance({ cr }: { cr: ControlResult }) {
+function References({ cr }: { cr: ControlResult }) {
   const c = cr.control;
-  const starred = cr.legal.some((l) => l.concreteness.endsWith('*'));
-  const anySource = c.atlasMitigations.length + c.etsi.length + c.iso.length + c.legal.length > 0;
+  if (c.atlasMitigations.length + c.etsi.length + c.iso.length === 0) return null;
   return (
     <>
-      <dt>{R.fields.source}</dt>
+      <dt>{R.fields.references}</dt>
       <dd>
-        {anySource && (
-          <ul className="plain">
-            {c.atlasMitigations.map((m, i) =>
-              m.id ? (
-                <li key={`m${i}`}>
-                  MITRE ATLAS 2026.10 ·{' '}
-                  <ExternalLink href={atlasMitigationUrl(m.id)}>
-                    <span className="mono">{m.id}</span>
-                  </ExternalLink>{' '}
-                  {m.name} · {m.concreteness}
-                  {m.partial ? ' (partial)' : ''}
-                </li>
-              ) : (
-                <li key={`m${i}`}>{m.raw}</li>
-              ),
-            )}
-            {c.etsi.map((e, i) =>
-              e.provision ? (
-                <li key={`e${i}`}>
-                  ETSI EN 304 223 V2.1.1 · <span className="mono">{e.provision}</span> {e.verb ? R.etsiVerb[e.verb] : ''} ·{' '}
-                  {e.concreteness} · {e.principle}
-                </li>
-              ) : (
-                <li key={`e${i}`}>{e.raw}</li>
-              ),
-            )}
-            {c.iso.map((s, i) =>
-              s.id ? (
-                <li key={`i${i}`}>
-                  ISO/IEC 27001:2022 Annex A · <span className="mono">{s.id}</span> {s.name} ({R.isoGeneral})
-                </li>
-              ) : (
-                <li key={`i${i}`}>{s.raw}</li>
-              ),
-            )}
-          </ul>
-        )}
-        {c.noSourceWhy && (
-          <p>
-            <strong>{R.noSource}.</strong> {c.noSourceWhy}
-          </p>
-        )}
-        {!anySource && !c.noSourceWhy && <Pending />}
+        <ul className="plain">
+          {c.atlasMitigations.map((m, i) =>
+            m.id ? (
+              <li key={`m${i}`}>
+                MITRE ATLAS ·{' '}
+                <ExternalLink href={atlasMitigationUrl(m.id)}>
+                  <span className="mono">{m.id}</span>
+                </ExternalLink>{' '}
+                {m.name}
+              </li>
+            ) : (
+              <li key={`m${i}`}>{m.raw}</li>
+            ),
+          )}
+          {c.etsi.map((e, i) =>
+            e.provision ? (
+              <li key={`e${i}`}>
+                ETSI EN 304 223 · <span className="mono">{e.provision}</span> {e.verb ? R.etsiVerb[e.verb] : ''} · {e.principle}
+              </li>
+            ) : (
+              <li key={`e${i}`}>{e.raw}</li>
+            ),
+          )}
+          {c.iso.map((s, i) =>
+            s.id ? (
+              <li key={`i${i}`}>
+                ISO/IEC 27001:2022 · <span className="mono">{s.id}</span> {s.name} ({R.isoGeneral})
+              </li>
+            ) : (
+              <li key={`i${i}`}>{s.raw}</li>
+            ),
+          )}
+        </ul>
       </dd>
-      <dt>{R.fields.legal}</dt>
-      <dd>
-        {cr.legal.length ? (
-          <>
-            <ul className="plain">
-              {cr.legal.map((l) => (
-                <LegalLine key={l.key} l={l} />
-              ))}
-            </ul>
-            {starred && <p className="small muted">{R.proposedClassification}</p>}
-          </>
-        ) : (
-          <span className="muted">{R.noLegal}</span>
-        )}
-      </dd>
-      <dt>{R.fields.nature}</dt>
-      <dd>{c.nature.length ? c.nature.join(' · ') : <Pending />}</dd>
-      <dt>{R.fields.concreteness}</dt>
-      <dd>{c.concreteness ?? <Pending />}</dd>
     </>
   );
 }
 
-function ControlRow({ cr }: { cr: ControlResult }) {
+function ControlRow({ cr, unknown }: { cr: ControlResult; unknown: Set<string> }) {
   const c = cr.control;
   return (
     <details className="row">
@@ -168,31 +141,53 @@ function ControlRow({ cr }: { cr: ControlResult }) {
           <dd>{c.what}</dd>
           <dt>{R.fields.evidence}</dt>
           <dd>{c.evidence}</dd>
-          <dt>{R.fields.appliesWhen}</dt>
-          <dd>{c.appliesWhen}</dd>
-          <dt>{R.fields.phases}</dt>
-          <dd>{c.phases.join(' · ')}</dd>
-          <dt>{R.fields.mitigates}</dt>
+          <dt>{R.fields.whyApplies}</dt>
+          <dd>{cr.basis === 'crossCutting' ? R.crossCutting : <WhyApplies why={cr.why} unknown={unknown} />}</dd>
+          {cr.techniques.length > 0 && (
+            <>
+              <dt>{R.fields.mitigates}</dt>
+              <dd>
+                <ul className="plain">
+                  {cr.techniques.map((t) => (
+                    <li key={t.id}>
+                      <TechniqueId id={t.id} /> {techniqueName(t.id)}
+                    </li>
+                  ))}
+                </ul>
+              </dd>
+            </>
+          )}
+          {cr.newerAtlas.length > 0 && (
+            <>
+              <dt>{R.fields.newerAtlas}</dt>
+              <dd>
+                <ul className="plain">
+                  {cr.newerAtlas.map((id) => (
+                    <li key={id}>
+                      <TechniqueId id={id} /> {techniqueName(id)}
+                    </li>
+                  ))}
+                </ul>
+              </dd>
+            </>
+          )}
+          <References cr={cr} />
+          <dt>{R.fields.legal}</dt>
           <dd>
-            {c.crossCutting && <p className="muted">{R.crossCutting}</p>}
-            {cr.techniques.length ? (
+            {cr.legal.length ? (
               <ul className="plain">
-                {cr.techniques.map((t) => (
-                  <li key={t.id}>
-                    <ExternalLink href={atlasTechniqueUrl(t.id)}>
-                      <span className="mono">{t.id}</span>
-                    </ExternalLink>{' '}
-                    {techniqueById.get(t.id)?.nameAtlas ?? techniqueById.get(t.id)?.nameMatrix} <LinkKindTag link={t.link} />
+                {cr.legal.map((l) => (
+                  <li key={l.key}>
+                    {l.citation} · {R.legalIf} {l.condition} {l.tbc && <TbcTag />}
                   </li>
                 ))}
               </ul>
             ) : (
-              !c.crossCutting && <span className="muted">{R.noApplicableTechniques}</span>
+              <span className="muted">{R.noLegal}</span>
             )}
           </dd>
-          <Provenance cr={cr} />
-          <dt>{R.fields.status}</dt>
-          <dd>{c.status}</dd>
+          <dt>{R.fields.phases}</dt>
+          <dd>{c.phases.join(' · ')}</dd>
         </dl>
       </div>
     </details>
@@ -204,35 +199,48 @@ function TechniqueRow({ tr, unknown }: { tr: TechniqueResult; unknown: Set<strin
   return (
     <details className="row">
       <summary>
-        <RowId id={t.id} />
+        <span className="mono row-id">{t.id}</span>
         <span className="row-name">{t.nameAtlas ?? t.nameMatrix}</span>
         <span className="row-meta">{t.tactics.join(', ')}</span>
         {tr.tbc && <TbcTag />}
       </summary>
       <div className="row-body">
         <dl className="kv">
-          <dt>ATLAS</dt>
-          <dd>
-            <ExternalLink href={t.jnic.link ?? atlasTechniqueUrl(t.id)}>
-              <span className="mono">{t.id}</span>
-            </ExternalLink>
-            {!t.inAtlas && <> · <Tag>{R.notInAtlas}</Tag></>}
-          </dd>
-          <dt>{R.fields.description}</dt>
-          <dd>{t.jnic.description ? <MoreText text={t.jnic.description} /> : <Pending />}</dd>
+          {t.inAtlas && (
+            <>
+              <dt>MITRE ATLAS</dt>
+              <dd>
+                <TechniqueId id={t.id} />
+              </dd>
+            </>
+          )}
+          {t.jnic.description && (
+            <>
+              <dt>{R.fields.description}</dt>
+              <dd>
+                <MoreText text={t.jnic.description} />
+              </dd>
+            </>
+          )}
           <dt>{R.fields.whyApplies}</dt>
           <dd>
             <WhyApplies why={tr.why} unknown={unknown} />
           </dd>
-          <dt>{R.fields.coverage}</dt>
-          <dd>{t.jnic.coverage ? <MoreText text={t.jnic.coverage} /> : <Pending />}</dd>
+          {t.jnic.coverage && (
+            <>
+              <dt>{R.fields.coverage}</dt>
+              <dd>
+                <MoreText text={t.jnic.coverage} />
+              </dd>
+            </>
+          )}
           <dt>{R.fields.coveredBy}</dt>
           <dd>
             {tr.controls.length ? (
               <ul className="plain">
                 {tr.controls.map((c) => (
                   <li key={c.id}>
-                    <span className="mono">{c.id}</span> {controlById.get(c.id)?.name} <LinkKindTag link={c.link} />
+                    <span className="mono">{c.id}</span> {controlById.get(c.id)?.name}
                   </li>
                 ))}
               </ul>
@@ -240,36 +248,26 @@ function TechniqueRow({ tr, unknown }: { tr: TechniqueResult; unknown: Set<strin
               <span className="muted">{R.noControls}</span>
             )}
           </dd>
-          {t.notes.length > 0 && (
-            <>
-              <dt>{R.fields.notes}</dt>
-              <dd className="pre">{t.notes.join('\n')}</dd>
-            </>
-          )}
         </dl>
       </div>
     </details>
   );
 }
 
-const RowId = ({ id }: { id: string }) => <span className="mono row-id">{id}</span>;
-
 // ---------------------------------------------------------------- views
-function ControlsView({ controls }: { controls: ControlResult[] }) {
-  const main = controls.filter((c) => c.group === 'main');
+/** Items grouped under the lifecycle phases, in phase order. */
+function ByPhase<T>({ items, inPhase, render }: { items: T[]; inPhase: (item: T, phase: string) => boolean; render: (item: T, phase: string) => React.ReactNode }) {
   return (
     <>
       {phaseOrder.map((phase) => {
-        const list = main.filter((c) => c.phase === phase);
+        const list = items.filter((i) => inPhase(i, phase));
         if (!list.length) return null;
         return (
           <section key={phase} className="phase-group" aria-label={phase}>
-            <h3 className="label">
+            <h4 className="label">
               {phase} <span className="muted">· {list.length}</span>
-            </h3>
-            {list.map((cr) => (
-              <ControlRow key={cr.id} cr={cr} />
-            ))}
+            </h4>
+            {list.map((i) => render(i, phase))}
           </section>
         );
       })}
@@ -277,25 +275,61 @@ function ControlsView({ controls }: { controls: ControlResult[] }) {
   );
 }
 
-function AttacksView({ techniques, unknown }: { techniques: TechniqueResult[]; unknown: Set<string> }) {
-  const main = techniques.filter((t) => t.group === 'main');
+function ScopedView<T extends { scope: 'specific' | 'baseline' }>({
+  items,
+  specificLead,
+  baselineLead,
+  inPhase,
+  render,
+}: {
+  items: T[];
+  specificLead: string;
+  baselineLead: string;
+  inPhase: (item: T, phase: string) => boolean;
+  render: (item: T, phase: string) => React.ReactNode;
+}) {
+  const specific = items.filter((i) => i.scope === 'specific');
+  const baseline = items.filter((i) => i.scope === 'baseline');
   return (
     <>
-      {phaseOrder.map((phase) => {
-        const list = main.filter((t) => t.technique.phases.includes(phase));
-        if (!list.length) return null;
-        return (
-          <section key={phase} className="phase-group" aria-label={phase}>
-            <h3 className="label">
-              {phase} <span className="muted">· {list.length}</span>
-            </h3>
-            {list.map((tr) => (
-              <TechniqueRow key={`${phase}-${tr.id}`} tr={tr} unknown={unknown} />
-            ))}
-          </section>
-        );
-      })}
+      <div className="scope-block">
+        <h3 className="label">
+          {R.specificTitle} <span className="muted">· {specific.length}</span>
+        </h3>
+        <p className="small muted readable">{specificLead}</p>
+        {specific.length ? <ByPhase items={specific} inPhase={inPhase} render={render} /> : <p>{R.noneSpecific}</p>}
+      </div>
+      {baseline.length > 0 && (
+        <Disclosure className="scope-block" summary={<h3 className="label inline">{R.baseline(baseline.length)}</h3>}>
+          <p className="small muted readable">{baselineLead}</p>
+          <ByPhase items={baseline} inPhase={inPhase} render={render} />
+        </Disclosure>
+      )}
     </>
+  );
+}
+
+function ControlsView({ controls, unknown }: { controls: ControlResult[]; unknown: Set<string> }) {
+  return (
+    <ScopedView
+      items={controls.filter((c) => c.group === 'main')}
+      specificLead={R.specificControlsLead}
+      baselineLead={R.baselineControlsLead}
+      inPhase={(c, phase) => c.phase === phase}
+      render={(cr) => <ControlRow key={cr.id} cr={cr} unknown={unknown} />}
+    />
+  );
+}
+
+function AttacksView({ techniques, unknown }: { techniques: TechniqueResult[]; unknown: Set<string> }) {
+  return (
+    <ScopedView
+      items={techniques.filter((t) => t.group === 'main')}
+      specificLead={R.specificAttacksLead}
+      baselineLead={R.baselineAttacksLead}
+      inPhase={(t, phase) => t.technique.phases.includes(phase)}
+      render={(tr, phase) => <TechniqueRow key={`${phase}-${tr.id}`} tr={tr} unknown={unknown} />}
+    />
   );
 }
 
@@ -318,15 +352,16 @@ function ObligationsBlock({ result }: { result: AssessmentResult }) {
                 <summary>
                   <span className="row-name">{o.obligation}</span>
                   <span className="row-meta">{o.article}</span>
-                  {o.concreteness ? <Tag>{o.concreteness}</Tag> : <Tag>{en.common.pendingValidation}</Tag>}
                   {tbc && <TbcTag />}
                 </summary>
-                <div className="row-body">
-                  <dl className="kv">
-                    <dt>{R.preconditions}</dt>
-                    <dd className="pre">{o.preconditions ?? <Pending />}</dd>
-                  </dl>
-                </div>
+                {o.preconditions && (
+                  <div className="row-body">
+                    <dl className="kv">
+                      <dt>{R.preconditions}</dt>
+                      <dd className="pre">{o.preconditions}</dd>
+                    </dl>
+                  </div>
+                )}
               </details>
             ))}
         </div>
@@ -351,18 +386,21 @@ function exportPayload(answers: Answers, r: AssessmentResult) {
       name: c.control.name,
       phase: c.phase,
       group: c.group,
+      scope: c.scope,
       toBeConfirmed: c.tbc,
-      techniques: c.techniques,
-      legal: c.legal.map((l) => ({ citation: l.citation, condition: l.condition, concreteness: l.concreteness, toBeConfirmed: l.tbc })),
+      techniques: c.techniques.map((t) => t.id),
+      newerAtlasTechniques: c.newerAtlas,
+      legal: c.legal.map((l) => ({ citation: l.citation, condition: l.condition, toBeConfirmed: l.tbc })),
     })),
     techniques: r.techniques.map((t) => ({
       id: t.id,
       name: t.technique.nameAtlas ?? t.technique.nameMatrix,
       phases: t.technique.phases,
       group: t.group,
+      scope: t.scope,
       toBeConfirmed: t.tbc,
       why: t.why,
-      controls: t.controls,
+      controls: t.controls.map((c) => c.id),
     })),
     obligations: r.obligations.map((o) => ({ id: o.obligation.id, article: o.obligation.article, obligation: o.obligation.obligation, toBeConfirmed: o.tbc })),
   };
@@ -486,7 +524,7 @@ export function Results() {
           </Link>
         </div>
         <h2 className="visually-hidden">{view === 'controls' ? R.viewControls : R.viewAttacks}</h2>
-        {view === 'controls' ? <ControlsView controls={result.controls} /> : <AttacksView techniques={result.techniques} unknown={unknown} />}
+        {view === 'controls' ? <ControlsView controls={result.controls} unknown={unknown} /> : <AttacksView techniques={result.techniques} unknown={unknown} />}
       </section>
 
       <section className="section">
@@ -496,7 +534,7 @@ export function Results() {
             <div className="phase-group">
               <h3 className="label">{R.controlsHeading}</h3>
               {supplyControls.map((cr) => (
-                <ControlRow key={cr.id} cr={cr} />
+                <ControlRow key={cr.id} cr={cr} unknown={unknown} />
               ))}
             </div>
           )}

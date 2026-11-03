@@ -24,7 +24,6 @@ function Intro() {
             <p>
               {premise.join(' ')} {en.cyber.method}
             </p>
-            <p className="small">{en.cyber.premiseSource}</p>
           </div>
         }
       />

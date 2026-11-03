@@ -32,14 +32,17 @@ untranslated Spanish, the private draft standard, or name-like text not found in
 
 Authored inputs, all **proposed and pending review**, live in `data/authored/`:
 translations (`translations_es_en.json`), AI Act obligation rules (`obligation_rules.json`),
-corrections (`corrections.json`). The full list of proposed items is in `reports/proposed-items.md`.
+corrections (`corrections.json`), technique condition refinements (`applicability_refinements.json`) and
+the curation of the JNIC matrix (`matrix_curation.json`). The full list of proposed items is in
+`reports/proposed-items.md`.
 
 ## Layout
 
 - `src/engine/` — pure, deterministic TypeScript: expression parser (no `eval`), questionnaire,
   assessment, deadline rules. `service.ts` is the swappable boundary for a future backend.
-- `src/content/en.ts` — every UI string; `glossary.ts` — Spanish → English terms.
-- `src/data/` — generated JSON plus fictitious DPO demo data (`dpo-*.json`).
+- `src/content/en.ts` — every UI string.
+- `src/data/` — generated JSON (including the curated JNIC matrix, `jnic-matrix.json`) plus fictitious DPO
+  demo data (`dpo-*.json`).
 - `src/pages/` — home, `cyber/`, `dpo/`, `how/`.
 
 Placeholders to fill in `src/content/en.ts`: `{{SITE_NAME}}`, `{{TAGLINE}}` and the home H1.
