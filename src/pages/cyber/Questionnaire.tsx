@@ -43,7 +43,7 @@ function Question({
   const select = (id: string) => onChange(multi ? toggleMulti(q, value, id) : id);
 
   return (
-    <fieldset className={`q ${isYesNo(q) ? 'q-inline' : ''}`} id={`q-${q.id}`} tabIndex={-1} aria-invalid={missing || undefined}>
+    <fieldset className={`q ${isYesNo(q) && !text?.help ? 'q-inline' : ''}`} id={`q-${q.id}`} tabIndex={-1} aria-invalid={missing || undefined}>
       <legend className="q-label">
         {text?.label ?? q.id}
         {missing && (
