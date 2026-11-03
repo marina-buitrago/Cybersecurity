@@ -142,9 +142,21 @@ export const en = {
         label:
           'Is it a safety component of a product, or itself a product, covered by the Union harmonisation legislation listed in Annex I (Art. 6(1) AI Act)?',
       },
-      art6_3: {
-        label:
-          'Does an Art. 6(3) AI Act condition apply? (narrow procedural task; improves the result of a completed human activity; detects decision-making patterns without replacing human assessment; preparatory task; and the system does not profile natural persons)',
+      art6_3_conditions: {
+        label: 'Does any exception of Art. 6(3) AI Act apply? The system is intended to:',
+        help: 'An Annex III system is not high-risk when it does not pose a significant risk of harm to the health, safety or fundamental rights of natural persons, including by not materially influencing the outcome of decision making, and one of these conditions is fulfilled. Select all that apply.',
+        options: {
+          art6_3_a: 'Perform a narrow procedural task (Art. 6(3)(a))',
+          art6_3_b: 'Improve the result of a previously completed human activity (Art. 6(3)(b))',
+          art6_3_c:
+            'Detect decision-making patterns or deviations from prior decision-making patterns, without replacing or influencing the previously completed human assessment without proper human review (Art. 6(3)(c))',
+          art6_3_d: 'Perform a preparatory task to an assessment relevant for the purposes of the Annex III use cases (Art. 6(3)(d))',
+          none: 'None of these',
+        },
+      },
+      profiling: {
+        label: 'Does the system perform profiling of natural persons?',
+        help: 'Art. 6(3), last subparagraph: an Annex III system that performs profiling of natural persons is always high-risk, even when one of the exceptions above applies.',
       },
       art50: {
         label: 'Which Art. 50 AI Act cases apply?',
@@ -286,7 +298,8 @@ export const en = {
       logicCols: { step: 'Step', question: 'Question', answer: 'Answer', flags: 'Flags set' },
       purposeOnly: '(purpose-only variable)',
       unknownSetsAll: 'all phases treated as controlled; every result "To be confirmed"',
-      highRiskRule: 'high_risk is set when Annex I applies, or an Annex III area applies without the Art. 6(3) exception.',
+      highRiskRule:
+        'high_risk is set when Annex I applies, or when an Annex III area applies and the Art. 6(3) derogation does not: no condition (a)–(d) is fulfilled, or the system performs profiling of natural persons. The purpose-only variable art6_3 is set when the derogation applies (a condition is fulfilled and there is no profiling).',
       flagsTitle: 'Flag vocabulary (sheet "Flags")',
       flagCols: { flag: 'Flag', meaning: 'Meaning', step: 'Step' },
       purposeVocabTitle: 'Purpose-only variables (proposed; used only for AI Act obligations)',

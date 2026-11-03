@@ -57,6 +57,9 @@ export const ANNEX3_AREAS = [
 
 export const ART5_PRACTICES = ['art5_a', 'art5_b', 'art5_c', 'art5_d', 'art5_e', 'art5_f', 'art5_g', 'art5_h'] as const;
 
+/** Art. 6(3)(a)–(d) AI Act: conditions under which an Annex III system is not high-risk. */
+export const ART6_3_CONDITIONS = ['art6_3_a', 'art6_3_b', 'art6_3_c', 'art6_3_d'] as const;
+
 export const ART50_CASES = [
   'art50_interaction',
   'art50_synthetic',
@@ -65,10 +68,10 @@ export const ART50_CASES = [
   'art50_public_text',
 ] as const;
 
-const hasAnnex3 = (a: Answers) => {
-  const v = a.annex3;
-  return v === UNKNOWN || (Array.isArray(v) && v.some((x) => x !== NONE));
-};
+/** True when a multi-select answer is "I don't know" or has an option other than "None of these". */
+const anyOption = (v: Answer | undefined) => v === UNKNOWN || (Array.isArray(v) && v.some((x) => x !== NONE));
+const hasAnnex3 = (a: Answers) => anyOption(a.annex3);
+const hasArt63Condition = (a: Answers) => hasAnnex3(a) && anyOption(a.art6_3_conditions);
 
 export const QUESTIONS: QuestionDef[] = [
   // ---- Step 1. What is the system?
@@ -173,8 +176,17 @@ export const QUESTIONS: QuestionDef[] = [
     options: [...ANNEX3_AREAS.map((id) => ({ id, sets: ['annex3', id] })), { id: NONE, exclusive: true }],
     unknownSets: ['annex3', ...ANNEX3_AREAS],
   },
+  // Art. 6(3): the exceptions (a)–(d), then the exception to them (profiling keeps the system high-risk).
+  {
+    id: 'art6_3_conditions',
+    step: 3,
+    kind: 'multi',
+    options: [...ART6_3_CONDITIONS.map((id) => ({ id })), { id: NONE, exclusive: true }],
+    unknownSets: [],
+    showIf: hasAnnex3,
+  },
+  { ...yesNo('profiling', 3, []), showIf: hasArt63Condition },
   yesNo('annex1', 3, ['annex1']),
-  { ...yesNo('art6_3', 3, ['art6_3']), showIf: hasAnnex3 },
   {
     id: 'art50',
     step: 3,
@@ -287,7 +299,9 @@ export function computeFlags(answers: Answers): FlagState {
     }
   }
 
-  // High risk: Annex I safety component, or an Annex III area without the Art. 6(3) exception.
+  // High risk: Annex I safety component, or an Annex III area without the Art. 6(3) derogation.
+  // The derogation applies when a condition (a)–(d) is met and the system does not profile natural persons
+  // (Art. 6(3), last subparagraph: profiling always keeps an Annex III system high-risk).
   const tri = (id: string): Tri | undefined => {
     const v = answers[id];
     if (v === UNKNOWN) return 'unknown';
@@ -297,9 +311,23 @@ export function computeFlags(answers: Answers): FlagState {
   };
   const a3 = answers.annex3;
   const annex3: Tri = a3 === UNKNOWN ? 'unknown' : Array.isArray(a3) && a3.some((x) => x !== NONE) ? 'yes' : 'no';
-  const exception = tri('art6_3');
-  let annex3Part: Tri = 'no';
-  if (annex3 !== 'no') annex3Part = exception === 'yes' ? 'no' : exception === 'no' && annex3 === 'yes' ? 'yes' : 'unknown';
+  let derogation: Tri = 'no';
+  if (annex3 !== 'no') {
+    const c = answers.art6_3_conditions;
+    const conditions: Tri = c === UNKNOWN ? 'unknown' : anyOption(c) ? 'yes' : Array.isArray(c) ? 'no' : 'unknown';
+    const profiling = conditions === 'no' ? 'no' : (tri('profiling') ?? 'unknown');
+    if (conditions === 'no' || profiling === 'yes') derogation = 'no';
+    else if (conditions === 'yes' && profiling === 'no') derogation = 'yes';
+    else derogation = 'unknown';
+  }
+  const annex3Part: Tri = annex3 === 'no' || derogation === 'yes' ? 'no' : derogation === 'no' ? annex3 : 'unknown';
+  if (derogation === 'yes') {
+    known.add('art6_3');
+    addSource('art6_3', { questionId: 'art6_3_conditions', optionId: 'yes' });
+  } else if (derogation === 'unknown') {
+    unknownOnly.add('art6_3');
+    addSource('art6_3', { questionId: 'art6_3_conditions', optionId: UNKNOWN });
+  }
   const annex1 = tri('annex1') ?? 'no';
   const highRisk: Tri =
     annex1 === 'yes' || annex3Part === 'yes' ? 'yes' : annex1 === 'unknown' || annex3Part === 'unknown' ? 'unknown' : 'no';

@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { assess, type AssessmentResult } from './assess';
 import { engineData } from './data';
 import { ExpressionError, evaluate, parse } from './expr';
-import { QUESTIONS, UNKNOWN, computeFlags, type Answers } from './questionnaire';
+import { QUESTIONS, UNKNOWN, computeFlags, visibleQuestions, type Answers } from './questionnaire';
 
 /** Answers with every yes/no question set to "no" and neutral step-3 answers, overridden by `over`. */
 function answers(over: Answers): Answers {
@@ -70,7 +70,7 @@ describe('2. Public RAG chatbot on a third-party API with personal data', () => 
     expect(r.techniques.find((t) => t.id === 'AML.T0070')?.group).toBe('main');
   });
   it('purpose never changes techniques or controls', () => {
-    const highRisk = run({ ...a, annex3: ['annex3_employment'], art6_3: 'no', role: ['provider', 'deployer'], gpai: 'yes' });
+    const highRisk = run({ ...a, annex3: ['annex3_employment'], art6_3_conditions: ['none'], role: ['provider', 'deployer'], gpai: 'yes' });
     expect(highRisk.highRisk).toBe('yes');
     expect(techIds(highRisk)).toEqual(techIds(r));
     expect(ctrlIds(highRisk)).toEqual(ctrlIds(r));
@@ -187,11 +187,32 @@ describe('Other rules', () => {
     expect(r.controls).toEqual([]);
     expect(r.obligations).toEqual([]);
   });
-  it('treats an Annex III system as high risk unless Art. 6(3) applies', () => {
-    expect(run(answers({ annex3: ['annex3_education'], art6_3: 'no' })).highRisk).toBe('yes');
-    expect(run(answers({ annex3: ['annex3_education'], art6_3: 'yes' })).highRisk).toBe('no');
-    expect(run(answers({ annex3: ['annex3_education'], art6_3: UNKNOWN })).highRisk).toBe('unknown');
+  it('treats an Annex III system as high risk unless the Art. 6(3) derogation applies', () => {
+    const edu = { annex3: ['annex3_education'] };
+    // No exception (a)-(d): high risk.
+    expect(run(answers({ ...edu, art6_3_conditions: ['none'] })).highRisk).toBe('yes');
+    // An exception and no profiling: not high risk.
+    expect(run(answers({ ...edu, art6_3_conditions: ['art6_3_a'], profiling: 'no' })).highRisk).toBe('no');
+    // An exception, but the system profiles natural persons: always high risk.
+    expect(run(answers({ ...edu, art6_3_conditions: ['art6_3_b', 'art6_3_d'], profiling: 'yes' })).highRisk).toBe('yes');
+    // Unknowns keep the classification open.
+    expect(run(answers({ ...edu, art6_3_conditions: UNKNOWN, profiling: 'no' })).highRisk).toBe('unknown');
+    expect(run(answers({ ...edu, art6_3_conditions: ['art6_3_c'], profiling: UNKNOWN })).highRisk).toBe('unknown');
     expect(run(answers({ annex1: 'yes' })).highRisk).toBe('yes');
+  });
+  it('asks about profiling only when an Art. 6(3) exception may apply', () => {
+    const shown = (a: Answers) => visibleQuestions(3, answers(a)).map((q) => q.id);
+    expect(shown({ annex3: ['none'] })).not.toContain('art6_3_conditions');
+    expect(shown({ annex3: ['annex3_employment'], art6_3_conditions: ['none'] })).not.toContain('profiling');
+    expect(shown({ annex3: ['annex3_employment'], art6_3_conditions: ['art6_3_a'] })).toContain('profiling');
+    // A stale "yes" to profiling is ignored once no exception is selected.
+    expect(run(answers({ annex3: ['annex3_employment'], art6_3_conditions: ['none'], profiling: 'yes' })).highRisk).toBe('yes');
+  });
+  it('selects the Art. 6(4) and 49(2) obligation only when the derogation applies', () => {
+    const art64 = (a: Answers) => run(answers({ annex3: ['annex3_employment'], role: ['provider'], ...a })).obligations.some((o) => o.obligation.row === 5);
+    expect(art64({ art6_3_conditions: ['art6_3_a'], profiling: 'no' })).toBe(true);
+    expect(art64({ art6_3_conditions: ['art6_3_a'], profiling: 'yes' })).toBe(false);
+    expect(art64({ art6_3_conditions: ['none'] })).toBe(false);
   });
   it('tags only what depends on an unknown answer', () => {
     const r = run(answers({ rag: UNKNOWN }));

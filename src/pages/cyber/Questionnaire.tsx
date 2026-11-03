@@ -54,7 +54,7 @@ function Question({
         )}
       </legend>
       {(text?.help || multi) && <p className="q-help">{text?.help ?? en.cyber.selectAll}</p>}
-      <div className={`q-options ${q.options.length > 5 ? 'q-options-col' : ''}`}>
+      <div className={`q-options ${q.options.length > 4 ? 'q-options-col' : ''}`}>
         {ids.map((id) => (
           <label key={id} className={`q-opt ${id === UNKNOWN ? 'q-unknown' : ''}`}>
             <input type={multi ? 'checkbox' : 'radio'} name={q.id} checked={checked(id)} onChange={() => select(id)} />

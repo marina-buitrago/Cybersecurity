@@ -12,7 +12,10 @@ Each item is marked "proposed" in the data or the interface.
    plus 18 purpose-only variables (importer, distributor, Annex I, Annex III areas, Art. 6(3), Art. 50 cases).
    File: `data/authored/obligation_rules.json`. These variables never affect techniques or controls.
 3. **Step 3 question wording**: Art. 5(1)(a)–(h) practices, Annex III points 1–8, Annex I, Art. 6(3) and
-   Art. 50 cases (`src/content/en.ts`, `cyber.questions`).
+   Art. 50 cases (`src/content/en.ts`, `cyber.questions`). Art. 6(3) is asked in two steps (decision of
+   3 Nov 2026): which exception (a)–(d) applies, then, only if one does, whether the system profiles natural
+   persons. The derogation applies when an exception is fulfilled and there is no profiling; the general test
+   ("does not pose a significant risk of harm…") is given as help text, not asked separately.
 4. **Phase option split** (decision of 3 Nov 2026): "Fine-tuning or alignment of model weights" sets
    `trains_model`; "Configuration: RAG corpus, prompt templates, agent memory or tools" does not, but both
    count as controlling "Fine-tuning and alignment".
