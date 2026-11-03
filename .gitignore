@@ -1,0 +1,8 @@
+# Source spreadsheets (may contain confidential material) never go into git
+data/source/
+node_modules/
+dist/
+.venv/
+__pycache__/
+*.pyc
+.DS_Store

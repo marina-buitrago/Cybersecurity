@@ -1,0 +1,1103 @@
+{
+ "premise": [
+  {
+   "row": 1,
+   "text": "The AI Act's concept of minimal risk is not equivalent to low cybersecurity risk"
+  },
+  {
+   "row": 2,
+   "text": "The AI Act does not classify by attack surface, but by direct legal and social impact."
+  },
+  {
+   "row": 3,
+   "text": "Many minimal-risk systems are publicly accessible, highly scalable, integrated with external data, etc."
+  },
+  {
+   "row": 4,
+   "text": "Frameworks such as NIST and ENISA show that many systems classified as minimal risk present considerable attack surfaces, which justifies additional security controls even if regulation does not require them."
+  },
+  {
+   "row": 5,
+   "text": "Unlike the AI Act, the NIST AI RMF does not define a minimal risk category. Risk is assessed based on technical exposure, data flows and attack surfaces, which means that many systems classified as minimal risk under the AI Act still require robust cybersecurity controls."
+  },
+  {
+   "row": 6,
+   "text": "Systems that are not critical from a legal standpoint can be critical from a security standpoint."
+  },
+  {
+   "row": 7,
+   "text": "Apply controls proportional to exposure, not to sector."
+  }
+ ],
+ "riskTable": [
+  {
+   "row": 11,
+   "risk": "Data poisoning",
+   "description": "Introducing malicious data into training or retraining to alter the model's behaviour.",
+   "whyMinimalRiskIsExposed": "Minimal-risk systems are often trained or fine-tuned with open data, user inputs or continuous retraining. Because they are not considered critical, no strict controls are imposed on data quality and integrity, which allows malicious data to be introduced undetected."
+  },
+  {
+   "row": 12,
+   "risk": "Prompt injection",
+   "description": "Manipulating the model through inputs designed to bypass restrictions or change its behaviour.",
+   "whyMinimalRiskIsExposed": "Many minimal-risk systems are interactive (chatbots, etc.). The model accepts direct instructions from the user and there is no clear separation between data and control, which makes it easier for an attacker to manipulate the system's behaviour through text."
+  },
+  {
+   "row": 13,
+   "risk": "Indirect prompt injection",
+   "description": "The model executes instructions hidden in external data (documents, websites, emails).",
+   "whyMinimalRiskIsExposed": "These systems are often integrated with external sources (documents, etc.). Because they are not considered high-risk, external content is not filtered or validated as a potential attack vector, allowing hidden instructions that the model executes without distinguishing them from legitimate data."
+  },
+  {
+   "row": 14,
+   "risk": "Model extraction / stealing",
+   "description": "Partial or total reconstruction of the model through repeated queries to the API.",
+   "whyMinimalRiskIsExposed": "As non-critical systems, they are often exposed through APIs with weak authentication and without strict limits. This accessibility facilitates attacks using repeated queries to reconstruct the model."
+  },
+  {
+   "row": 15,
+   "risk": "Membership inference",
+   "description": "Inferring whether a specific data point was used in training.",
+   "whyMinimalRiskIsExposed": "Many minimal-risk systems use real user data (text, feedback) to improve performance. Because they are not classified as sensitive, advanced defences are not applied, making it possible to infer whether a specific data point was part of the training set."
+  },
+  {
+   "row": 16,
+   "risk": "Model inversion",
+   "description": "Approximate reconstruction of training data from the model's outputs.",
+   "whyMinimalRiskIsExposed": "In publicly accessible models, detailed outputs make it easier to reconstruct training information, a risk not considered in the minimal-risk category."
+  }
+ ],
+ "obligations": [
+  {
+   "id": "AIA-OBL-02",
+   "row": 2,
+   "section": "General",
+   "obligation": "AI literacy",
+   "article": "Art. 4 AI Act",
+   "concreteness": "Abstract",
+   "classRaw": "Abstracta",
+   "preconditions": "Providers and deployers of AI systems.",
+   "rule": "provider || deployer",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-03",
+   "row": 3,
+   "section": "General",
+   "obligation": "Ensure the lawful, authorised and proportionate use of 'real-time' remote biometric identification systems in public spaces for law enforcement purposes.",
+   "article": "Art. 5(2)–(7) AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "A law enforcement authority (police, public prosecutor or competent bodies) deploying a 'real-time' remote biometric identification system in a public space for the prevention, detection or prosecution of serious crimes or threats to public security.",
+   "rule": "annex3_biometrics && annex3_law_enforcement && deployer",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-04",
+   "row": 4,
+   "section": "General",
+   "obligation": "Rules for classifying high-risk AI systems",
+   "article": "Art. 6 AI Act",
+   "concreteness": null,
+   "classRaw": null,
+   "preconditions": null,
+   "rule": "annex3 || annex1",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-05",
+   "row": 5,
+   "section": "General",
+   "obligation": "Assessment of an Annex III system not considered high-risk",
+   "article": "Arts. 6(4) and 49(2) AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "Applies to providers of Annex III AI systems who conclude that the system does not pose a significant risk to health, safety or fundamental rights and does not materially influence decision-making, meeting the conditions of Art. 6(3) AI Act (narrow tasks, improving a human activity, detecting patterns, preparatory tasks, no profiling).",
+   "rule": "annex3 && art6_3 && provider",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-07",
+   "row": 7,
+   "section": "High-risk AI requirements",
+   "obligation": "Risk management and verification system for high-risk AI systems",
+   "article": "Arts. 9(1)–(10) and 60 AI Act",
+   "concreteness": "Abstract",
+   "classRaw": "Abstracta",
+   "preconditions": "Applies to high-risk AI systems (Annex III AI Act). Obliged parties: providers, prospective providers and deployers.",
+   "rule": "high_risk && (provider || deployer)",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-08",
+   "row": 8,
+   "section": "High-risk AI requirements",
+   "obligation": "Data collection process in high-risk AI",
+   "article": "Art. 10(1)–(2) AI Act",
+   "concreteness": "Abstract",
+   "classRaw": "Abstracta",
+   "preconditions": "High-risk AI systems that use data for training, validation or testing. Obliged parties: providers and deployers.",
+   "rule": "high_risk && trains_model && (provider || deployer)",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-09",
+   "row": 9,
+   "section": "High-risk AI requirements",
+   "obligation": "Preparation of training, validation and testing data in high-risk AI",
+   "article": "Art. 10(2)(c) AI Act",
+   "concreteness": "Abstract",
+   "classRaw": "Abstracta",
+   "preconditions": "High-risk AI systems that use data for training, validation or testing.",
+   "rule": "high_risk && trains_model",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-10",
+   "row": 10,
+   "section": "High-risk AI requirements",
+   "obligation": "Quality assessment of training, validation and testing data in high-risk AI",
+   "article": "Art. 10(3)–(4) and Art. 26(4) AI Act",
+   "concreteness": "Abstract",
+   "classRaw": "Abtracta",
+   "preconditions": "High-risk AI systems that use data for training, validation or testing.",
+   "rule": "high_risk && trains_model",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-11",
+   "row": 11,
+   "section": "High-risk AI requirements",
+   "obligation": "Bias assessment in high-risk AI",
+   "article": "Art. 10(2)(f)–(g) AI Act",
+   "concreteness": "Abstract",
+   "classRaw": "Abstracta",
+   "preconditions": "High-risk AI systems that use data for training, validation or testing.",
+   "rule": "high_risk && trains_model",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-12",
+   "row": 12,
+   "section": "High-risk AI requirements",
+   "obligation": "Processing of special categories of data in high-risk AI",
+   "article": "Art. 10(5) AI Act",
+   "concreteness": "Abstract",
+   "classRaw": "Abstracta",
+   "preconditions": "High-risk AI systems that use special categories of data for training, validation or testing.",
+   "rule": "high_risk && trains_model && personal_data",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-13",
+   "row": 13,
+   "section": "High-risk AI requirements",
+   "obligation": "Drawing up, maintaining and updating the full technical documentation for high-risk AI (large companies and ordinary providers)",
+   "article": "Art. 11(1)–(2) and Annex IV AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "High-risk AI systems placed on the market or put into service in the EU. The obligation falls on whoever places the system on the market or puts it into service.",
+   "rule": "high_risk && provider",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-14",
+   "row": 14,
+   "section": "High-risk AI requirements",
+   "obligation": "Drawing up simplified technical documentation for high-risk AI (SMEs and start-ups)",
+   "article": "Art. 11(1)–(2) and Annex IV AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "Being an SME or start-up that places on the market or puts into service in the EU a high-risk AI system.",
+   "rule": "high_risk && provider",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-15",
+   "row": 15,
+   "section": "High-risk AI requirements",
+   "obligation": "Implementing a module that enables record-keeping",
+   "article": "Art. 12 AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "Being the provider and/or deployer of an AI system, with the system classified as high-risk.",
+   "rule": "high_risk && (provider || deployer)",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-16",
+   "row": 16,
+   "section": "High-risk AI requirements",
+   "obligation": "Record-keeping – biometric identification",
+   "article": "Art. 12 AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "Being the provider and/or deployer of an AI system, with the system classified as high-risk for biometric identification.",
+   "rule": "high_risk && annex3_biometrics && (provider || deployer)",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-17",
+   "row": 17,
+   "section": "High-risk AI requirements",
+   "obligation": "Transparency and provision of information to deployers",
+   "article": "Art. 13 AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "Being the provider of an AI system classified as high-risk.",
+   "rule": "high_risk && provider",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-18",
+   "row": 18,
+   "section": "High-risk AI requirements",
+   "obligation": "Human oversight obligations for providers",
+   "article": "Art. 14(1)–(3)(a)–(b) and (5) AI Act",
+   "concreteness": "Abstract",
+   "classRaw": "Abstracta",
+   "preconditions": "Being the provider of an AI system classified as high-risk.",
+   "rule": "high_risk && provider",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-19",
+   "row": 19,
+   "section": "High-risk AI requirements",
+   "obligation": "Human oversight obligations for deployers",
+   "article": "Art. 14(3)(b), (4)(a)–(e) and (5) and Art. 26(3) AI Act",
+   "concreteness": "Abstract",
+   "classRaw": "Abstracta",
+   "preconditions": "(i) Being the deployer of a high-risk AI system.\n(ii) The provider has defined applicable oversight measures.",
+   "rule": "high_risk && deployer",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-20",
+   "row": 20,
+   "section": "High-risk AI requirements",
+   "obligation": "Ensure an appropriate level of accuracy in the design and development of the high-risk AI system",
+   "article": "Art. 15(1)–(3) AI Act",
+   "concreteness": "Abstract",
+   "classRaw": "Abstracta",
+   "preconditions": "Being the provider of a high-risk AI system.",
+   "rule": "high_risk && provider",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-21",
+   "row": 21,
+   "section": "High-risk AI requirements",
+   "obligation": "Ensure the robustness of the high-risk AI system against errors, faults or inconsistencies",
+   "article": "Art. 15(1) and (4) AI Act",
+   "concreteness": "Abstract",
+   "classRaw": "Abstracta",
+   "preconditions": "Being the provider of a high-risk AI system.",
+   "rule": "high_risk && provider",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-22",
+   "row": 22,
+   "section": "High-risk AI requirements",
+   "obligation": "Ensure the cybersecurity of high-risk AI systems against manipulation or attacks",
+   "article": "Art. 15(1) and (5) AI Act",
+   "concreteness": "Abstract",
+   "classRaw": "Abstracta",
+   "preconditions": "Being the provider or deployer of a high-risk AI system.",
+   "rule": "high_risk && (provider || deployer)",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-23",
+   "row": 23,
+   "section": "High-risk AI requirements",
+   "obligation": "Provider identification",
+   "article": "Art. 16(b) AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "Being the provider of a high-risk AI system.",
+   "rule": "high_risk && provider",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-24",
+   "row": 24,
+   "section": "High-risk AI requirements",
+   "obligation": "Quality management system",
+   "article": "Arts. 16(c) and 17 AI Act",
+   "concreteness": "Abstract",
+   "classRaw": "Abstracta",
+   "preconditions": "Being the provider of a high-risk AI system.",
+   "rule": "high_risk && provider",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-25",
+   "row": 25,
+   "section": "High-risk AI requirements",
+   "obligation": "Documentation keeping",
+   "article": "Arts. 16(d) and 18 AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "Being the provider of a high-risk AI system.",
+   "rule": "high_risk && provider",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-26",
+   "row": 26,
+   "section": "High-risk AI requirements",
+   "obligation": "Keeping of log files",
+   "article": "Arts. 16(e), 19 and 26(6) AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "Being the provider or deployer of a high-risk AI system.",
+   "rule": "high_risk && (provider || deployer)",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-27",
+   "row": 27,
+   "section": "High-risk AI requirements",
+   "obligation": "Conformity assessment",
+   "article": "Arts. 16(f) and 43 AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "(i) Being the provider of an AI system classified as high-risk under the AI Act (Annex III or Annex I, Section A, as applicable).\n(ii) Intending to place the system on the EU market or put it into service.",
+   "rule": "high_risk && provider",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-28",
+   "row": 28,
+   "section": "High-risk AI requirements",
+   "obligation": "EU declaration of conformity",
+   "article": "Arts. 16(g) and 47 AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "(i) Being the provider of a high-risk AI system.\n(ii) Having completed the conformity assessment procedure (Art. 43) before placing on the market or putting into service.\n(iii) Intending to place or make the system available on the Union market.",
+   "rule": "high_risk && provider",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-29",
+   "row": 29,
+   "section": "High-risk AI requirements",
+   "obligation": "CE marking",
+   "article": "Arts. 16(h) and 48 AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "(i) Being the provider of a high-risk AI system.\n(ii) Having successfully completed the conformity assessment procedure.",
+   "rule": "high_risk && provider",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-30",
+   "row": 30,
+   "section": "High-risk AI requirements",
+   "obligation": "Ongoing registration",
+   "article": "Arts. 16(i) and 49(1) AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "(i) Being the provider of a high-risk AI system.\n(ii) The system must be listed in Annex III, except the systems referred to in point 2 of Annex III (which are registered at national level).\n(iii) Intending to place the system on the EU market or put it into service.\n(iv) For deployers: being a public authority or a Union institution, body, office or agency, or acting on their behalf.",
+   "rule": "high_risk && (provider || deployer)",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-31",
+   "row": 31,
+   "section": "High-risk AI requirements",
+   "obligation": "Corrective actions and communication",
+   "article": "Arts. 16(j) and 20 AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "(i) Being the provider of a high-risk AI system.\n(ii) The high-risk AI system has been placed on the market or put into service.\n(iii) There is an indication or certainty that the system does not conform to the Regulation or presents a risk of non-compliance.",
+   "rule": "high_risk && provider",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-32",
+   "row": 32,
+   "section": "High-risk AI requirements",
+   "obligation": "Demonstrating conformity to authorities",
+   "article": "Art. 16(k) AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "Being the provider of a high-risk AI system.",
+   "rule": "high_risk && provider",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-33",
+   "row": 33,
+   "section": "High-risk AI requirements",
+   "obligation": "Accessibility compliance",
+   "article": "Art. 16(l) AI Act",
+   "concreteness": "Abstract",
+   "classRaw": "Abstracta",
+   "preconditions": "Being the provider of a high-risk AI system.",
+   "rule": "high_risk && provider",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-34",
+   "row": 34,
+   "section": "High-risk AI requirements",
+   "obligation": "Cooperation with competent authorities",
+   "article": "Art. 21 AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "Being the provider of a high-risk AI system.",
+   "rule": "high_risk && provider",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-35",
+   "row": 35,
+   "section": "High-risk AI requirements",
+   "obligation": "Authorised representatives",
+   "article": "Art. 22 AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "(i) Being a provider of high-risk AI systems established in a third country.",
+   "rule": "high_risk && provider",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-36",
+   "row": 36,
+   "section": "High-risk AI requirements",
+   "obligation": "Obligations of importers",
+   "article": "Art. 23 AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "Being the importer of a high-risk AI system to be placed on the EU market.",
+   "rule": "high_risk && importer",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-37",
+   "row": 37,
+   "section": "High-risk AI requirements",
+   "obligation": "Obligations of distributors of high-risk AI systems",
+   "article": "Art. 24 AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "Being the distributor of a high-risk AI system to be made available in the EU.",
+   "rule": "high_risk && distributor",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-38",
+   "row": 38,
+   "section": "High-risk AI requirements",
+   "obligation": "Cooperation of the initial provider that ceases to be the provider",
+   "article": "Art. 25 AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "Having been the initial provider of an AI system that is now managed by a new provider.",
+   "rule": "high_risk && provider",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-39",
+   "row": 39,
+   "section": "High-risk AI requirements",
+   "obligation": "Impact assessment documentation (deployers)",
+   "article": "Art. 26(9) AI Act (refers to Art. 35 GDPR)",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "Obligation to carry out an impact assessment. Being a deployer.",
+   "rule": "high_risk && deployer && personal_data",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-40",
+   "row": 40,
+   "section": "High-risk AI requirements",
+   "obligation": "Deployer's duty to notify",
+   "article": "Arts. 26(5), 72, 73 and 79 AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "Being the deployer of a high-risk AI system.",
+   "rule": "high_risk && deployer",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-41",
+   "row": 41,
+   "section": "High-risk AI requirements",
+   "obligation": "Provider's post-market monitoring system and plan",
+   "article": "Art. 72(1)–(4) AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "Being the provider of a high-risk AI system placed on the market or put into service in the EU.",
+   "rule": "high_risk && provider",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-42",
+   "row": 42,
+   "section": "High-risk AI requirements",
+   "obligation": "Provider's duty to report serious incidents",
+   "article": "Art. 73 AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "Being the provider of a high-risk AI system.",
+   "rule": "high_risk && provider",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-43",
+   "row": 43,
+   "section": "High-risk AI requirements",
+   "obligation": "Fundamental rights impact assessment for deployers of high-risk systems",
+   "article": "Art. 27 AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "Being the deployer of a high-risk AI system that meets one of these conditions:\n(i) High-risk AI systems not in point 2 of Annex III deployed by bodies governed by public law or private entities providing public services.\n(ii) High-risk AI systems in point 5(b) of Annex III: systems for evaluating the creditworthiness or establishing the credit score of natural persons (excluding financial fraud detection).\n(iii) High-risk AI systems in point 5(c) of Annex III: risk assessment and pricing systems for life and health insurance.",
+   "rule": "high_risk && deployer",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-45",
+   "row": 45,
+   "section": "Requirements for certain AI systems",
+   "obligation": "Transparency in direct interaction with natural persons",
+   "article": "Art. 50(1) AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "AI systems that interact directly with natural persons and are not lawful systems for the investigation or prevention of criminal offences.",
+   "rule": "art50_interaction",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-46",
+   "row": 46,
+   "section": "Requirements for certain AI systems",
+   "obligation": "Transparency of AI-generated synthetic content",
+   "article": "Art. 50(2) AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "AI systems that generate synthetic audio, image, video or text content, except for assistive editing functions without substantial alterations, or where legally authorised for purposes related to criminal offences.",
+   "rule": "art50_synthetic",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-47",
+   "row": 47,
+   "section": "Requirements for certain AI systems",
+   "obligation": "Transparency in emotion recognition and biometric categorisation systems",
+   "article": "Art. 50(3) AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "Emotion recognition or biometric categorisation systems that interact with natural persons and are not legally authorised for criminal investigation purposes.",
+   "rule": "art50_emotion_biometric",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-48",
+   "row": 48,
+   "section": "Requirements for certain AI systems",
+   "obligation": "Transparency of content generated or manipulated as a deep fake",
+   "article": "Art. 50(4) AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "AI systems that generate or manipulate image, audio, video or text constituting a deep fake, or informative content for the public.",
+   "rule": "art50_deepfake || art50_public_text",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-50",
+   "row": 50,
+   "section": "General-purpose AI models",
+   "obligation": "Notify and cooperate with the Commission in the classification procedure for general-purpose AI models with potential systemic risk",
+   "article": "Arts. 51(1)–(2) and 52(1)–(4) AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "(i) General-purpose AI models that reach, exceed or are close to reaching the computation or impact threshold of Art. 51(1)–(2) AI Act.\n(ii) Models assessed by the Commission or by the scientific panel of experts under Annex XIII.",
+   "rule": "gpai_systemic_risk",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-51",
+   "row": 51,
+   "section": "General-purpose AI models",
+   "obligation": "Documentation, transparency and cooperation obligations for providers of general-purpose AI models",
+   "article": "Art. 53(1)–(7) AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "(i) Providers of general-purpose AI models, except those released under a free and open-source licence, unless the model presents systemic risk.",
+   "rule": "gpai_systemic_risk",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-52",
+   "row": 52,
+   "section": "General-purpose AI models",
+   "obligation": "Appoint and empower an authorised representative in the EU for providers from third countries",
+   "article": "Art. 54 AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "(i) Provider established outside the EU.\n(ii) General-purpose AI model not under a free and open-source licence, unless it presents systemic risk.",
+   "rule": "gpai_systemic_risk",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-54",
+   "row": 54,
+   "section": "General-purpose AI models with systemic risk",
+   "obligation": "Evaluation using standardised protocols and adversarial testing",
+   "article": "Art. 55(1)(a) AI Act",
+   "concreteness": "Abstract",
+   "classRaw": "Abstracta",
+   "preconditions": "General-purpose AI models with systemic risk. Being the provider.",
+   "rule": "gpai_systemic_risk",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-55",
+   "row": 55,
+   "section": "General-purpose AI models with systemic risk",
+   "obligation": "Assessment and mitigation of systemic risks at Union level",
+   "article": "Art. 55(1)(b) AI Act",
+   "concreteness": "Abstract",
+   "classRaw": "Abstracta",
+   "preconditions": "General-purpose AI models with systemic risk. Being the provider.",
+   "rule": "gpai_systemic_risk",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-56",
+   "row": 56,
+   "section": "General-purpose AI models with systemic risk",
+   "obligation": "Tracking, documenting and reporting serious incidents",
+   "article": "Art. 55(1)(c) AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "General-purpose AI models with systemic risk. Being the provider.",
+   "rule": "gpai_systemic_risk",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-57",
+   "row": 57,
+   "section": "General-purpose AI models with systemic risk",
+   "obligation": "Ensure cybersecurity of the model and the infrastructure",
+   "article": "Art. 55(1)(d) AI Act",
+   "concreteness": "Abstract",
+   "classRaw": "Abstracta",
+   "preconditions": "General-purpose AI models with systemic risk. Being the provider.",
+   "rule": "gpai_systemic_risk",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-58",
+   "row": 58,
+   "section": "General-purpose AI models with systemic risk",
+   "obligation": "Obligations for testing high-risk AI systems in real-world conditions outside AI regulatory sandboxes",
+   "article": "Arts. 60(1)–(9) and 61 AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "(i) Being the provider or prospective provider of a high-risk AI system under Annex III AI Act.\n(ii) Intending to test in real-world conditions outside AI regulatory sandboxes.\n(iii) Having a real-world testing plan approved by the market surveillance authority of the member state.",
+   "rule": "annex3 && high_risk && provider",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  },
+  {
+   "id": "AIA-OBL-59",
+   "row": 59,
+   "section": "General-purpose AI models with systemic risk",
+   "obligation": "Adherence to the code of practice",
+   "article": "Art. 56(7) AI Act",
+   "concreteness": "Concrete",
+   "classRaw": "Material",
+   "preconditions": "Being the provider of a general-purpose AI model.",
+   "rule": "gpai_systemic_risk",
+   "ruleStatus": "proposed",
+   "translationStatus": "proposed"
+  }
+ ],
+ "purposeVocabulary": [
+  {
+   "id": "importer",
+   "meaning": "AI Act role: importer."
+  },
+  {
+   "id": "distributor",
+   "meaning": "AI Act role: distributor."
+  },
+  {
+   "id": "annex1",
+   "meaning": "Safety component of a product, or a product, covered by Annex I legislation."
+  },
+  {
+   "id": "annex3",
+   "meaning": "Falls within at least one Annex III area."
+  },
+  {
+   "id": "annex3_biometrics",
+   "meaning": "Annex III point 1: biometrics."
+  },
+  {
+   "id": "annex3_critical_infrastructure",
+   "meaning": "Annex III point 2: critical infrastructure."
+  },
+  {
+   "id": "annex3_education",
+   "meaning": "Annex III point 3: education and vocational training."
+  },
+  {
+   "id": "annex3_employment",
+   "meaning": "Annex III point 4: employment and workers' management."
+  },
+  {
+   "id": "annex3_essential_services",
+   "meaning": "Annex III point 5: access to essential private and public services."
+  },
+  {
+   "id": "annex3_law_enforcement",
+   "meaning": "Annex III point 6: law enforcement."
+  },
+  {
+   "id": "annex3_migration",
+   "meaning": "Annex III point 7: migration, asylum and border control."
+  },
+  {
+   "id": "annex3_justice_democracy",
+   "meaning": "Annex III point 8: administration of justice and democratic processes."
+  },
+  {
+   "id": "art6_3",
+   "meaning": "The Annex III system meets an Art. 6(3) condition."
+  },
+  {
+   "id": "art50_interaction",
+   "meaning": "Art. 50 case: interacts directly with natural persons."
+  },
+  {
+   "id": "art50_synthetic",
+   "meaning": "Art. 50 case: generates synthetic audio, image, video or text."
+  },
+  {
+   "id": "art50_emotion_biometric",
+   "meaning": "Art. 50 case: emotion recognition or biometric categorisation."
+  },
+  {
+   "id": "art50_deepfake",
+   "meaning": "Art. 50 case: generates or manipulates deep fakes."
+  },
+  {
+   "id": "art50_public_text",
+   "meaning": "Art. 50 case: generates or manipulates text published on matters of public interest."
+  }
+ ],
+ "gapsTitle": "AI Act gaps",
+ "gaps": [
+  {
+   "article": "Art. 2(8) AI Act",
+   "description": "This Regulation does not apply to any research, testing or development activity regarding AI systems or AI models prior to their being placed on the market or put into service. Such activities shall be conducted in accordance with applicable Union law. Testing in real world conditions shall not be covered by that exclusion.",
+   "reason": "AI behaviour emerges from training and design choices, regulation that only kicks in at deployment cannot fully influence the factors that cause unsafe outcomes. Without rules governing how models are constructed, developers may choose methods that produce unpredictable or harmful behaviors that later testing can only partially detect.\n\nRegulatory exclusion of development phases institutionalizes uncertainty because it defers risk assessment until deployment, when some core deficiencies may be irreversible or costly to mitigate.",
+   "papers": [
+    "Judge, B., Nitzberg, M., & Russell, S. (2025). When code isn’t law: rethinking regulation for artificial intelligence. Policy and Society, 44(1), 85-97.",
+    "Currie, W. L., Leimeister, J. M., Schlagwein, D., & Willcocks, L. (2025). Rethinking technology regulation in the age of AI risks. Journal of Information Technology, 40(3), 236-245."
+   ]
+  },
+  {
+   "article": "Arts. 52–53 AI Act",
+   "description": "The AI Act introduces a distinct regulatory regime for general-purpose AI (GPAI) models, imposing primarily transparency, documentation, and information-sharing obligations on their providers. Even where GPAI models are designated as posing systemic risk, the applicable requirements remain less detailed and less prescriptive than those imposed on high-risk AI systems, focusing largely on risk mitigation processes rather than concrete technical safeguards.",
+   "reason": "The AI Act imposes extensive controls and compliance obligations on high-risk AI systems, while establishing comparatively fewer and less prescriptive requirements for other categories of AI, including general-purpose AI models, whether or not they are designated as posing systemic risk.\n\nThe AI Act’s overall risk-based structure note that simplified risk hierarchies can distort the reality of AI harms. GPAI models may pose broader or harder-to-capture harms that are not fully addressed by the comparatively limited GPAI obligations under the Act.",
+   "papers": [
+    "Gasiola, G. G. (2025). Rebuilding the pyramid: The AI Act’s risk-based approach using a binary decision diagram. Computer Law & Security Review, 58, 106189."
+   ]
+  },
+  {
+   "article": "Arts. 15 and 55(1)(d) AI Act",
+   "description": "There are only two provisions regarding cybersecurity which are the following. For high-risk systems art. 15 in which it is stated that \"high-risk AI systems must be designed and developed to achieve an appropriate level of accuracy, robustness, and cybersecurity and perform consistently throughout their lifecycle\" (abstract and high level obligations, no indications on how to proceed). Art. 55 (for GPAI with systemic risk) \"ensure an adequate level of cybersecurity protection for the general-purpose AI model with systemic risk and the physical infrastructure of the model.\"",
+   "reason": "There is a lack of attention paid to cibersecurity in the AI Act. There are no cybersecurity provisions for AI systems that are not considered high risk or GPAI with systemic risk.\n\nComplex AI systems like LLMs raise novel and emergent cybersecurity risks (e.g., model poisoning, adversarial attacks) that the legislative text only does not touch on.\n\nThe concepts of robustness and cybersecurity in the legal text are imprecise, making it unclear exactly what testable, technical requirements developers must satisfy. There is no clear alignment between legal wording and established machine learning security concepts.\n\nNo such cybersecurity obligations apply to providers of other AI systems.",
+   "papers": [
+    "Nolte, Henrik, Miriam Rateike, and Michèle Finck. \"Robustness and cybersecurity in the eu artificial intelligence act.\" Proceedings of the 2025 ACM Conference on Fairness, Accountability, and Transparency. 2025.",
+    "Novelli, C., Casolari, F., Hacker, P., Spedicato, G., & Floridi, L. (2024). Generative AI in EU law: Liability, privacy, intellectual property, and cybersecurity. Computer Law & Security Review, 55, 106066."
+   ]
+  },
+  {
+   "article": "General",
+   "description": "The AI Act, while comprehensive for certain risks, lacks explicit measures addressing some new and emerging AI threats.",
+   "reason": "Analysts have observed that the Act provides high-level coverage for traditional concerns (like data privacy or bias), but is “comparatively weak in addressing newer risks like hallucination and prompt injection” attacks.",
+   "papers": [
+    "Jonnala, S., Parida, P. K., & Thomas, N. M. (2025). EU AI Act Underrepresented and Insufficient to Address the Risk and Vulnerabilities of Generative AI. International Journal of Business Analytics (IJBAN), 12(1), 1-27."
+   ]
+  },
+  {
+   "article": "General",
+   "description": "Almost no obligations for systems that are not considered high-risk",
+   "reason": "The high-risk list focuses on areas like healthcare, employment, education, law enforcement, etc., but omits sectors where AI failures could cause systemic economic or safety consequences. Excluding these domains leaves a regulatory gap for AI systems that could dramatically impact society and security.",
+   "papers": [
+    "Jørgensen, B. N., & Ma, Z. G. (2025). Regulating AI in the Energy Sector: A Scoping Review of EU Laws, Challenges, and Global Perspectives. Energies, 18(9), 2359."
+   ]
+  }
+ ],
+ "papers": [
+  {
+   "reference": "Judge, B., Nitzberg, M., & Russell, S. (2025). When code isn’t law: rethinking regulation for artificial intelligence. Policy and Society, 44(1), 85-97.",
+   "abstract": "This article examines the challenges of regulating artificial intelligence (AI) systems and proposes an adapted model of regulation suitable for AI's novel features. Unlike past technologies, AI systems built using techniques like deep learning cannot be directly analyzed, specified, or audited against regulations. Their behavior emerges unpredictably from training rather than intentional design. However, the traditional model of delegating oversight to an expert agency, which has succeeded in high-risk sectors like aviation and nuclear power, should not be wholly discarded. Instead, policymakers must contain risks from today's opaque models while supporting research into provably safe AI architectures. Drawing lessons from AI safety literature and past regulatory successes, effective AI governance will likely require consolidated authority, licensing regimes, mandated training data and modeling disclosures, formal verification of system behavior, and the capacity for rapid intervention."
+  },
+  {
+   "reference": "Currie, W. L., Leimeister, J. M., Schlagwein, D., & Willcocks, L. (2025). Rethinking technology regulation in the age of AI risks. Journal of Information Technology, 40(3), 236-245.",
+   "abstract": "This paper argues that artificial intelligence exposes the shortcomings of traditional regulatory paradigms, challenging Easterbrook’s ‘Law of the Horse’ view that general legal principles suffice. AI’s opacity, autonomy, and systemic risks demand risk-informed, technology-specific governance. We identify the pacing problem, where innovation outstrips regulatory capacity, and propose a tripartite framework distinguishing functional, structural, and relational risks. Comparative analysis of EU, US, UK, and Chinese approaches highlights divergent logics of precaution, market oversight, hybrid flexibility, and state control. Effective governance requires embedding risk into policy design through adaptive, proportionate, and harmonised mechanisms, balancing innovation with accountability. The paper underscores the urgency of global coordination and calls for interdisciplinary IS research to inform anticipatory, participatory, and ethically grounded regulation."
+  },
+  {
+   "reference": "Gasiola, G. G. (2025). Rebuilding the pyramid: The AI Act’s risk-based approach using a binary decision diagram. Computer Law & Security Review, 58, 106189.",
+   "abstract": "The risk-based approach of the AI Act (AIA) results in a complex normative structure, in which the applicable subset of rules for a specific AI system is determined by the general scope of application and the classification of the system into particular risk levels. A pyramid of risks, a widely accepted explanation of the risk-based approach proposed by the European Commission, fails to provide a comprehensive classification process and does not accurately reflect the risk levels (either directly or indirectly) recognized in the AIA or the relation between classification criteria. This paper proposes a corrective solution to rebuild the pyramid of risks. Given that each AI system must be classified into one risk level and the AIA assigns a specific subset of rules to each risk level, an adaptation of the Commission’s risk levels was necessary."
+  },
+  {
+   "reference": "Nolte, Henrik, Miriam Rateike, and Michèle Finck. \"Robustness and cybersecurity in the eu artificial intelligence act.\" Proceedings of the 2025 ACM Conference on Fairness, Accountability, and Transparency. 2025.",
+   "abstract": "The EU Artificial Intelligence Act (AIA) establishes different legal principles for different types of AI systems. While prior work has sought to clarify some of these principles, little attention has been paid to robustness and cybersecurity. This paper aims to fill this gap. We identify legal challenges and shortcomings in provisions related to robustness and cybersecurity for high-risk AI systems(Art. 15 AIA) and general-purpose AI models (Art. 55 AIA). We show that robustness and cybersecurity demand resilience against performance disruptions. Furthermore, we assess potential challenges in implementing these provisions in light of recent advancements in the machine learning (ML) literature. Our analysis informs efforts to develop harmonized standards, guidelines by the European Commission, as well as benchmarks and measurement methodologies under Art. 15(2) AIA. With this, we seek to bridge the gap between legal terminology and ML research, fostering a better alignment between research and implementation efforts."
+  },
+  {
+   "reference": "Novelli, C., Casolari, F., Hacker, P., Spedicato, G., & Floridi, L. (2024). Generative AI in EU law: Liability, privacy, intellectual property, and cybersecurity. Computer Law & Security Review, 55, 106066.",
+   "abstract": "The advent of Generative AI, particularly through Large Language Models (LLMs) like ChatGPT and its successors, marks a paradigm shift in the AI landscape. Advanced LLMs exhibit multimodality, handling diverse data formats, thereby broadening their application scope. However, the complexity and emergent autonomy of these models introduce challenges in predictability and legal compliance. This paper delves into the legal and regulatory implications of Generative AI and LLMs in the European Union context, analyzing aspects of liability, privacy, intellectual property, and cybersecurity. It critically examines the adequacy of the existing and proposed EU legislation, including the Artificial Intelligence Act (AIA) draft, in addressing the unique challenges posed by Generative AI in general and LLMs in particular. The paper identifies potential gaps and shortcomings in the legislative framework and proposes recommendations to ensure the safe and compliant deployment of generative models, ensuring they align with the EU's evolving digital landscape and legal standards."
+  },
+  {
+   "reference": "Beltrán, M. (2025). AI algorithms under scrutiny: GDPR, DSA, AI Act and CRA as pillars for algorithmic security and privacy in the European Union. Computers & Security, 104628",
+   "abstract": "Unified Approach (or issues with it) in EU AI Regulation"
+  },
+  {
+   "reference": "Stazi, A. (2025). AI Act, Competition and Fairness: Compliance Issues, Overlaps in EU Legislations and Global Regulatory Scenario. Overlaps in EU Legislations and Global Regulatory Scenario (June 13, 2025).",
+   "abstract": "Unified Approach (or issues with it) in EU AI Regulation"
+  },
+  {
+   "reference": "G. de Boiscuille, The Tortuous Path to AI Act Compliance: A Competitive Burden for Companies, in A. Abbott, T. Schrepel (a cura di), Artificial Intelligence and Competition Policy, Institute of Competition Policy, 2024, available at https://ssrn.com/abstract=4983718.",
+   "abstract": "Unified Approach (or issues with it) in EU AI Regulation"
+  },
+  {
+   "reference": "Pathak, M. (2024). Data Governance Redefined: The Evolution of EU Data Regulations from the GDPR to the DMA, DSA, DGA, Data Act and AI Act. Full paper available: European Data Protection Law Review (EDPL), 10(1).",
+   "abstract": "Unified Approach (or issues with it) in EU AI Regulation"
+  },
+  {
+   "reference": "Gruchała, P. S., Nicosia, L., & Zięciak, M. (2025). Harmonising risk assessments for high-risk AI systems under the GDPR and the AI Act. Journal of Data Protection & Privacy, 7(4), 359-371.",
+   "abstract": "Unified Approach (or issues with it) in EU AI Regulation"
+  },
+  {
+   "reference": "Parlov, N., Mateša, B., & Mladinić, A. (2025, June). Structuring AI Risk Management Framework: EU AI Act FRIA, GDPR DPIA and ISO 42001/23894. In 2025 14th Mediterranean Conference on Embedded Computing (MECO) (pp. 1-8). IEEE.",
+   "abstract": "Unified approach regulations + standards"
+  },
+  {
+   "reference": "Tibebu, H. (2024). Framework for Data Protection, Security, and Privacy in AI Applications.",
+   "abstract": "Unified approach regulations + standards"
+  },
+  {
+   "reference": "Bolgouras, V., Zarras, A., Leka, C., Stylianou, I., Farao, A., & Xenakis, C. (2025). Eu regulatory ecosystem for ethical AI. AI and Ethics, 1-18.",
+   "abstract": "Unified approach regulations + standards"
+  },
+  {
+   "reference": "Bolda, S. (2024). Navigating the EU AI Act: Proposed Compliance Measures for AI Providers and Deployers/Author Stefan Bolda, BSc.",
+   "abstract": "Unified approach regulations + standards"
+  },
+  {
+   "reference": "Dotan, R., Blili-Hamelin, B., Madhavan, R., Matthews, J., & Scarpino, J. (2024). Evolving AI risk management: A maturity model based on the NIST AI risk management framework. arXiv preprint arXiv:2401.15229.",
+   "abstract": "Risk management framework"
+  },
+  {
+   "reference": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-5.pdf",
+   "abstract": "Need for AI standarisation"
+  },
+  {
+   "reference": "https://csrc.nist.gov/pubs/ai/100/2/e2023/final",
+   "abstract": "taxonomy of attacks and mitigations"
+  },
+  {
+   "reference": "EU Law WP 101_Ebers_Cover",
+   "abstract": "Criticism to AI Act"
+  },
+  {
+   "reference": "Disclousure risks",
+   "abstract": null
+  },
+  {
+   "reference": "Hall, P., Mundahl, O., & Park, S. (2025). \"The Pitfalls of 'Security by Obscurity' and What They Mean for Transparent AI.\" Proceedings of the 39th AAAI Conference on Artificial Intelligence (AAAI-25), pp. 28042–28048.",
+   "abstract": "This paper systematically argues that the AI community should learn from the security community's decades-long experience with transparency. It advocates for explicit threat modeling of AI documentation and disclosure artifacts, arguing that each transparency measure should be evaluated through an adversarial lens — not to reject transparency, but to engineer it with security awareness. It directly supports the concept of treating disclosure artifacts as potential attack vectors requiring assessment."
+  },
+  {
+   "reference": "Hintersdorf, D. & Struppek, L. (2023). \"Balancing Transparency and Risk: The Security and Privacy Risks of Open-Source Machine Learning Models.\" Montreal AI Ethics Institute / Technical University of Darmstadt.",
+   "abstract": "Argues that publicly available model architecture, weights, and training procedures give adversaries a concrete advantage in mounting attacks (model inversion, membership inference, adversarial examples, backdoor exploitation). Directly supports the idea that technical disclosure about AI systems enables attack vectors that must be assessed."
+  },
+  {
+   "reference": "Vassilev, A., Oprea, A., Fordyce, A., & Anderson, H. (2024). \"Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations.\" NIST AI 100-2e2023.",
+   "abstract": "NIST's taxonomy of adversarial ML attacks identifies categories where attacker capabilities are directly enhanced by access to technical information about a model. This supports treating each disclosure element as a potential enabler of specific attack classes."
+  },
+  {
+   "reference": "Securing AI Systems: A Guide to Known Attacks and Impacts (2025). Japan AI Safety Institute (J-AISI), arXiv:2506.23296.",
+   "abstract": "Identifies information disclosure minimization as a basic defense principle against model extraction and inference attacks, stating that unnecessary information disclosure (e.g., providing confidence scores alongside predictions) directly enables adversarial exploitation."
+  },
+  {
+   "reference": "Schuett, J. (2023). \"Risk Management in the Artificial Intelligence Act.\" European Journal of Risk Regulation, 15(2), 367–385.",
+   "abstract": "Provides a detailed analysis of Art. 9 AI Act's risk management system obligations. While it does not specifically address disclosure-as-attack-vector, it argues for an expansive, iterative interpretation of Art. 9 that would accommodate incorporating security considerations (including those arising from transparency obligations) into the risk management process."
+  }
+ ],
+ "etsi": [
+  {
+   "area": "Lifecycle-based security approach",
+   "establishes": "The standard structures AI security from design to end of life.\nIt avoids treating security as a one-off activity and enforces consideration of risks during conception, development, deployment, operation and retirement.",
+   "gaps": "Risks are not prioritised by system impact.\nHigh-risk and low-risk systems may apply similar controls.\nUnder-protection of critical systems enables high-impact attacks."
+  },
+  {
+   "area": "AI security awareness and training",
+   "establishes": "Requires training on AI-specific security threats.\nTraining must be regularly updated and role-specific (developers, operators, data custodians).",
+   "gaps": "Training depth is not guaranteed.\nSuperficial awareness leads to human errors exploitable through misconfiguration or unsafe usage."
+  },
+  {
+   "area": "Secure design (security by design)",
+   "establishes": "Requires analysing functional requirements and security risks before building the system.\nSecurity must be integrated from the start, not added later.",
+   "gaps": "No mandatory technical baseline is defined.\nDeclarative security without real protection enables early adversarial attacks."
+  },
+  {
+   "area": "Threat modelling and risk management",
+   "establishes": "Requires identifying threats, assessing risks and applying proportionate controls.\nThe process must be reviewed whenever the system or its context changes.",
+   "gaps": "No specific methodology or minimum depth is imposed.\nShallow analyses fail to detect advanced or combined attacks."
+  },
+  {
+   "area": "Human oversight and responsibility",
+   "establishes": "Requires systems to allow effective human oversight.\nHuman supervision may act as a security control where appropriate.",
+   "gaps": "No guarantee that humans can understand or detect complex failures.\nSubtle manipulations and systematic errors may go unnoticed."
+  },
+  {
+   "area": "AI asset inventory",
+   "establishes": null,
+   "gaps": "No requirement for automation or continuous validation.\n\nForgotten or outdated assets can be exploited or maliciously replaced."
+  },
+  {
+   "area": "Traceability, versioning and authentication",
+   "establishes": "Promotes version control and traceability for audit and rollback.\nEnables verification of component authenticity.",
+   "gaps": "Verification is often point-in-time only.\nRuntime manipulation enables persistent attacks."
+  },
+  {
+   "area": "Data and input validation and sanitisation",
+   "establishes": "Requires data and inputs to be checked and cleaned.\n\nEspecially relevant during training and retraining phases.",
+   "gaps": "No mandatory techniques are specified.\n\nSophisticated data poisoning and prompt injection remain feasible."
+  },
+  {
+   "area": "Protection of confidential data and model weights",
+   "establishes": "Requires proportionate protection of sensitive training data and weights.\nRecognises them as critical security assets.",
+   "gaps": "Implicit memorisation is not fully addressed.\nMembership inference and sensitive data leakage remain possible."
+  },
+  {
+   "area": "Infrastructure and API security",
+   "establishes": "Requires access controls for APIs, models and pipelines.\nAims to reduce unnecessary exposure.",
+   "gaps": "No minimum policies (rate limits, quotas) are defined.\nModel extraction and API abuse attacks are enabled."
+  },
+  {
+   "area": "Environment separation and least privilege",
+   "establishes": "Recommends separating development, training and production environments.\nApplies the principle of least privilege.",
+   "gaps": "Strong isolation is not mandated.\nPrivilege escalation and cross-environment leakage remain possible."
+  },
+  {
+   "area": "Incident response and recovery management",
+   "establishes": "Requires AI-specific incident and recovery plans.\nIncludes restoring known safe states.",
+   "gaps": "Largely reactive.\nAdaptive and persistent attacks may remain active for long periods."
+  },
+  {
+   "area": "Responsible vulnerability disclosure",
+   "establishes": "Requires a clear vulnerability reporting policy.\nEncourages early detection of flaws.",
+   "gaps": "Depends on organisational maturity.\nLong-term silent exploitation is possible."
+  },
+  {
+   "area": "AI supply chain security",
+   "establishes": "Extends software supply chain security practices to AI.\nRequires evaluation of external components.",
+   "gaps": "Insecure components may be justified instead of mitigated.\nBackdoors and malicious dependencies can persist."
+  },
+  {
+   "area": "Re-evaluation of reused models",
+   "establishes": "Requires reassessing models before reuse.\nPrevents blind trust in existing models.",
+   "gaps": "No clear technical acceptance criteria.\nCompromised models may be propagated."
+  },
+  {
+   "area": "Comprehensive system documentation",
+   "establishes": "Requires documentation of data, models, prompts, guardrails, limitations and failure modes.\nSupports auditability and maintenance.",
+   "gaps": "Documentation is not automatically verified.\n“Paper security” may not reflect real behaviour."
+  },
+  {
+   "area": "Component integrity (cryptographic hashes)",
+   "establishes": "Uses hashes to verify authenticity of shared components.",
+   "gaps": "Does not protect during execution.\nRuntime model tampering remains possible."
+  },
+  {
+   "area": "Provenance of public training data",
+   "establishes": "Requires recording data sources (URL, timestamp).\nSupports traceability of datasets.",
+   "gaps": "Does not prevent pre-collection contamination.\nPre-existing data poisoning remains viable."
+  },
+  {
+   "area": "Audit logging of system prompt changes",
+   "establishes": "Requires logging changes affecting model behaviour.",
+   "gaps": "Does not cover inference-time manipulation.\nPersistent prompt injection remains possible."
+  },
+  {
+   "area": "Security testing and evaluation",
+   "establishes": "Requires security testing before deployment.",
+   "gaps": "Continuous red teaming is not mandatory.\nNovel post-deployment attacks may go undetected."
+  },
+  {
+   "area": "Continuous monitoring and logging",
+   "establishes": "Requires logging and behavioural monitoring over time.\nEnables anomaly detection.",
+   "gaps": "No metrics or thresholds are defined.\nSlow attacks (drift, gradual poisoning) may evade detection."
+  },
+  {
+   "area": "Secure end-of-life management",
+   "establishes": "Requires secure deletion of data, models and configurations upon retirement.",
+   "gaps": "External copies and derived models are not fully covered.\nResidual information leakage persists."
+  }
+ ]
+}

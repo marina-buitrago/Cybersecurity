@@ -1,0 +1,350 @@
+{
+ "description": "Proposed rules that decide which rows of the JNIC sheet 'Global - AI Act' appear in the 'Obligations by purpose' block. Authored by the development team from the preconditions column; status 'proposed' until legal review. They use the catalogue flags plus the purpose-only variables below, which never affect techniques or controls. Keyed by source row; 'article_es' guards against row drift.",
+ "status": "proposed",
+ "vocabulary": [
+  {
+   "id": "importer",
+   "meaning": "AI Act role: importer."
+  },
+  {
+   "id": "distributor",
+   "meaning": "AI Act role: distributor."
+  },
+  {
+   "id": "annex1",
+   "meaning": "Safety component of a product, or a product, covered by Annex I legislation."
+  },
+  {
+   "id": "annex3",
+   "meaning": "Falls within at least one Annex III area."
+  },
+  {
+   "id": "annex3_biometrics",
+   "meaning": "Annex III point 1: biometrics."
+  },
+  {
+   "id": "annex3_critical_infrastructure",
+   "meaning": "Annex III point 2: critical infrastructure."
+  },
+  {
+   "id": "annex3_education",
+   "meaning": "Annex III point 3: education and vocational training."
+  },
+  {
+   "id": "annex3_employment",
+   "meaning": "Annex III point 4: employment and workers' management."
+  },
+  {
+   "id": "annex3_essential_services",
+   "meaning": "Annex III point 5: access to essential private and public services."
+  },
+  {
+   "id": "annex3_law_enforcement",
+   "meaning": "Annex III point 6: law enforcement."
+  },
+  {
+   "id": "annex3_migration",
+   "meaning": "Annex III point 7: migration, asylum and border control."
+  },
+  {
+   "id": "annex3_justice_democracy",
+   "meaning": "Annex III point 8: administration of justice and democratic processes."
+  },
+  {
+   "id": "art6_3",
+   "meaning": "The Annex III system meets an Art. 6(3) condition."
+  },
+  {
+   "id": "art50_interaction",
+   "meaning": "Art. 50 case: interacts directly with natural persons."
+  },
+  {
+   "id": "art50_synthetic",
+   "meaning": "Art. 50 case: generates synthetic audio, image, video or text."
+  },
+  {
+   "id": "art50_emotion_biometric",
+   "meaning": "Art. 50 case: emotion recognition or biometric categorisation."
+  },
+  {
+   "id": "art50_deepfake",
+   "meaning": "Art. 50 case: generates or manipulates deep fakes."
+  },
+  {
+   "id": "art50_public_text",
+   "meaning": "Art. 50 case: generates or manipulates text published on matters of public interest."
+  }
+ ],
+ "rules": [
+  {
+   "row": 2,
+   "article_es": "Art. 4 RIA",
+   "rule": "provider || deployer"
+  },
+  {
+   "row": 3,
+   "article_es": "Art. 5(2)-(7) RIA",
+   "rule": "annex3_biometrics && annex3_law_enforcement && deployer"
+  },
+  {
+   "row": 4,
+   "article_es": "Art. 6 RIA",
+   "rule": "annex3 || annex1"
+  },
+  {
+   "row": 5,
+   "article_es": "Art. 6(4) y art. 49(2) RIA",
+   "rule": "annex3 && art6_3 && provider"
+  },
+  {
+   "row": 7,
+   "article_es": "Arts. 9(1–10) y 60 RIA",
+   "rule": "high_risk && (provider || deployer)"
+  },
+  {
+   "row": 8,
+   "article_es": "Art. 10(1)–(2) RIA",
+   "rule": "high_risk && trains_model && (provider || deployer)"
+  },
+  {
+   "row": 9,
+   "article_es": "Art. 10(2)(c) RIA",
+   "rule": "high_risk && trains_model"
+  },
+  {
+   "row": 10,
+   "article_es": "Art. 10(3–4), art. 26.4 RIA",
+   "rule": "high_risk && trains_model"
+  },
+  {
+   "row": 11,
+   "article_es": "Art. 10(2)(f-g) RIA",
+   "rule": "high_risk && trains_model"
+  },
+  {
+   "row": 12,
+   "article_es": "Art. 10(5) RIA",
+   "rule": "high_risk && trains_model && personal_data"
+  },
+  {
+   "row": 13,
+   "article_es": "Art. 11(1)-(2) RIA, Anexo IV RIA",
+   "rule": "high_risk && provider"
+  },
+  {
+   "row": 14,
+   "article_es": "Art. 11(1)-(2) RIA, Anexo IV RIA",
+   "rule": "high_risk && provider"
+  },
+  {
+   "row": 15,
+   "article_es": "Art. 12 RIA",
+   "rule": "high_risk && (provider || deployer)"
+  },
+  {
+   "row": 16,
+   "article_es": "Art.12 RIA",
+   "rule": "high_risk && annex3_biometrics && (provider || deployer)"
+  },
+  {
+   "row": 17,
+   "article_es": "Art. 13 RIA",
+   "rule": "high_risk && provider"
+  },
+  {
+   "row": 18,
+   "article_es": "Art. 14(1)–(3)(a)-(b), (5) RIA",
+   "rule": "high_risk && provider"
+  },
+  {
+   "row": 19,
+   "article_es": "Art. 14(3)(b), (4)(a)-(e), (5) y art. 26.3 RIA",
+   "rule": "high_risk && deployer"
+  },
+  {
+   "row": 20,
+   "article_es": "Art. 15(1)–(3) RIA",
+   "rule": "high_risk && provider"
+  },
+  {
+   "row": 21,
+   "article_es": "Art. 15(1) y (4) RIA",
+   "rule": "high_risk && provider"
+  },
+  {
+   "row": 22,
+   "article_es": "Art. 15(1) y (5) RIA",
+   "rule": "high_risk && (provider || deployer)"
+  },
+  {
+   "row": 23,
+   "article_es": "Art. 16(b) RIA",
+   "rule": "high_risk && provider"
+  },
+  {
+   "row": 24,
+   "article_es": "Art. 16(c ) RIA, art. 17 RIA",
+   "rule": "high_risk && provider"
+  },
+  {
+   "row": 25,
+   "article_es": "Art. 16(d) RIA, art. 18 RIA",
+   "rule": "high_risk && provider"
+  },
+  {
+   "row": 26,
+   "article_es": "Art. 16(e ) RIA, art. 19, art. 26.6 RIA",
+   "rule": "high_risk && (provider || deployer)"
+  },
+  {
+   "row": 27,
+   "article_es": "Art. 16(f) RIA, art. 43 RIA",
+   "rule": "high_risk && provider"
+  },
+  {
+   "row": 28,
+   "article_es": "Art. 16(g) RIA, art. 47 RIA",
+   "rule": "high_risk && provider"
+  },
+  {
+   "row": 29,
+   "article_es": "Art. 16(h) RIA, art. 48 RIA",
+   "rule": "high_risk && provider"
+  },
+  {
+   "row": 30,
+   "article_es": "Art. 16(i) RIA, art. 49(1) RIA",
+   "rule": "high_risk && (provider || deployer)"
+  },
+  {
+   "row": 31,
+   "article_es": "Art. 16(j) RIA, art. 20 RIA",
+   "rule": "high_risk && provider"
+  },
+  {
+   "row": 32,
+   "article_es": "Art. 16(k) RIA",
+   "rule": "high_risk && provider"
+  },
+  {
+   "row": 33,
+   "article_es": "Art. 16(l) RIA",
+   "rule": "high_risk && provider"
+  },
+  {
+   "row": 34,
+   "article_es": "Art. 21 RIA",
+   "rule": "high_risk && provider"
+  },
+  {
+   "row": 35,
+   "article_es": "Art. 22 RIA",
+   "rule": "high_risk && provider"
+  },
+  {
+   "row": 36,
+   "article_es": "Art. 23 RIA",
+   "rule": "high_risk && importer"
+  },
+  {
+   "row": 37,
+   "article_es": "Art. 24 RIA",
+   "rule": "high_risk && distributor"
+  },
+  {
+   "row": 38,
+   "article_es": "Art. 25 RIA",
+   "rule": "high_risk && provider"
+  },
+  {
+   "row": 39,
+   "article_es": "Art. 26(9) RIA Remite art. 35 RGPD",
+   "rule": "high_risk && deployer && personal_data"
+  },
+  {
+   "row": 40,
+   "article_es": "Arts. 26(5), 72, 73 y 79 RIA",
+   "rule": "high_risk && deployer"
+  },
+  {
+   "row": 41,
+   "article_es": "Art. 72(1)–(4) RIA",
+   "rule": "high_risk && provider"
+  },
+  {
+   "row": 42,
+   "article_es": "Art. 73 RIA",
+   "rule": "high_risk && provider"
+  },
+  {
+   "row": 43,
+   "article_es": "Art. 27 RIA",
+   "rule": "high_risk && deployer"
+  },
+  {
+   "row": 45,
+   "article_es": "Art. 50(1) RIA",
+   "rule": "art50_interaction"
+  },
+  {
+   "row": 46,
+   "article_es": "Art. 50(2) RIA",
+   "rule": "art50_synthetic"
+  },
+  {
+   "row": 47,
+   "article_es": "Art. 50(3) RIA",
+   "rule": "art50_emotion_biometric"
+  },
+  {
+   "row": 48,
+   "article_es": "Art. 50(4) RIA",
+   "rule": "art50_deepfake || art50_public_text"
+  },
+  {
+   "row": 50,
+   "article_es": "Art. 51(1)-(2) y Art. 52(1)-(4) RIA",
+   "rule": "gpai_systemic_risk"
+  },
+  {
+   "row": 51,
+   "article_es": "Art. 53(1)-(7) RIA",
+   "rule": "gpai_systemic_risk"
+  },
+  {
+   "row": 52,
+   "article_es": "Art. 54 RIA",
+   "rule": "gpai_systemic_risk"
+  },
+  {
+   "row": 54,
+   "article_es": "Art. 55(1)(a) RIA",
+   "rule": "gpai_systemic_risk"
+  },
+  {
+   "row": 55,
+   "article_es": "Art. 55(1)(b) RIA",
+   "rule": "gpai_systemic_risk"
+  },
+  {
+   "row": 56,
+   "article_es": "Art. 55(1)(c) RIA",
+   "rule": "gpai_systemic_risk"
+  },
+  {
+   "row": 57,
+   "article_es": "Art. 55(1)(d) RIA",
+   "rule": "gpai_systemic_risk"
+  },
+  {
+   "row": 58,
+   "article_es": "Art. 60(1)-(9) y art. 61 RIA",
+   "rule": "annex3 && high_risk && provider"
+  },
+  {
+   "row": 59,
+   "article_es": "Art. 56(7) RIA",
+   "rule": "gpai_systemic_risk"
+  }
+ ]
+}

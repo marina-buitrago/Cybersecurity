@@ -1,0 +1,1151 @@
+{
+ "description": "Spanish-to-English translations of JNIC 26 cells shown in the app. Authored by the development team; status 'proposed' until reviewed. The build fails if a source cell changes and its 'es' no longer matches.",
+ "entries": [
+  {
+   "key": "Global - AI Act!A2",
+   "es": "Alfabetización en materia de IA",
+   "en": "AI literacy",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B2",
+   "es": "Art. 4 RIA",
+   "en": "Art. 4 AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E2",
+   "es": "Proveedores y responsables del despliegue de sistemas de IA",
+   "en": "Providers and deployers of AI systems.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A3",
+   "es": "Garantizar el uso legal, autorizado y proporcional de sistemas de identificación biométrica remota “en tiempo real” en espacios públicos con fines de cumplimiento de la ley.",
+   "en": "Ensure the lawful, authorised and proportionate use of 'real-time' remote biometric identification systems in public spaces for law enforcement purposes.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B3",
+   "es": "Art. 5(2)-(7) RIA",
+   "en": "Art. 5(2)–(7) AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E3",
+   "es": "Una autoridad de cumplimiento del Derecho (policía, fiscalía u órganos competentes) que desplieguen un sistema de identificación biométrica remota “en tiempo real” en un espacio público para fines de prevención, detección o persecución de delitos graves o amenazas a la seguridad pública.",
+   "en": "A law enforcement authority (police, public prosecutor or competent bodies) deploying a 'real-time' remote biometric identification system in a public space for the prevention, detection or prosecution of serious crimes or threats to public security.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A4",
+   "es": "Reglas para clasificación sistemas IA de alto riesgo",
+   "en": "Rules for classifying high-risk AI systems",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B4",
+   "es": "Art. 6 RIA",
+   "en": "Art. 6 AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A5",
+   "es": "Evaluación de sistema anexo III pero no considerados alto riesgo",
+   "en": "Assessment of an Annex III system not considered high-risk",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B5",
+   "es": "Art. 6(4) y art. 49(2) RIA",
+   "en": "Arts. 6(4) and 49(2) AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E5",
+   "es": "Aplicable a proveedores de sistemas de IA del Anexo III que concluyan que el sistema no plantea riesgo importante a la salud, seguridad o derechos fundamentales, y no influye sustancialmente en decisiones, cumpliendo las condiciones del Art. 6(3) RIA (tareas limitadas, mejora de actividad humana, detección de patrones, tareas preparatorias, sin elaboración de perfiles).",
+   "en": "Applies to providers of Annex III AI systems who conclude that the system does not pose a significant risk to health, safety or fundamental rights and does not materially influence decision-making, meeting the conditions of Art. 6(3) AI Act (narrow tasks, improving a human activity, detecting patterns, preparatory tasks, no profiling).",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A6",
+   "es": "REQUISITOS IA ALTO RIESGO",
+   "en": "High-risk AI requirements",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A7",
+   "es": "Sistema de gestión y verificación de riesgos para sistemas de IA de alto riesgo",
+   "en": "Risk management and verification system for high-risk AI systems",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B7",
+   "es": "Arts. 9(1–10) y 60 RIA",
+   "en": "Arts. 9(1)–(10) and 60 AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E7",
+   "es": "Aplicable a sistemas de IA de alto riesgo (Anexo III RIA). Sujetos obligados: proveedores, proveedores potenciales y responsables del despliegue.",
+   "en": "Applies to high-risk AI systems (Annex III AI Act). Obliged parties: providers, prospective providers and deployers.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A8",
+   "es": "Proceso de recogida de datos en IA de alto riesgo",
+   "en": "Data collection process in high-risk AI",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B8",
+   "es": "Art. 10(1)–(2) RIA",
+   "en": "Art. 10(1)–(2) AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E8",
+   "es": "Sistemas de IA de alto riesgo que usan datos para entrenamiento, validación o prueba. Sujetos obligados: proveedores y responsables del despliegue.",
+   "en": "High-risk AI systems that use data for training, validation or testing. Obliged parties: providers and deployers.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A9",
+   "es": "Preparación de datos de entrenamiento, validación y prueba en IA de alto riesgo",
+   "en": "Preparation of training, validation and testing data in high-risk AI",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B9",
+   "es": "Art. 10(2)(c) RIA",
+   "en": "Art. 10(2)(c) AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E9",
+   "es": "Sistemas de IA de alto riesgo que usan datos para entrenamiento, validación o prueba.",
+   "en": "High-risk AI systems that use data for training, validation or testing.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A10",
+   "es": "Evaluación de calidad de los datos de entrenamiento, validación y prueba en IA de alto riesgo",
+   "en": "Quality assessment of training, validation and testing data in high-risk AI",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B10",
+   "es": "Art. 10(3–4), art. 26.4 RIA",
+   "en": "Art. 10(3)–(4) and Art. 26(4) AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E10",
+   "es": "Sistemas de IA de alto riesgo que usan datos para entrenamiento, validación o prueba.",
+   "en": "High-risk AI systems that use data for training, validation or testing.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A11",
+   "es": "Evaluación de sesgos en IA de alto riesgo",
+   "en": "Bias assessment in high-risk AI",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B11",
+   "es": "Art. 10(2)(f-g) RIA",
+   "en": "Art. 10(2)(f)–(g) AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E11",
+   "es": "Sistemas de IA de alto riesgo que usan datos para entrenamiento, validación o prueba.",
+   "en": "High-risk AI systems that use data for training, validation or testing.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A12",
+   "es": "Tratamiento de datos de categorías especiales en IA de alto riesgo",
+   "en": "Processing of special categories of data in high-risk AI",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B12",
+   "es": "Art. 10(5) RIA",
+   "en": "Art. 10(5) AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E12",
+   "es": "Sistemas de IA de alto riesgo que usan categorías especiales de datos para entrenamiento, validación o prueba.",
+   "en": "High-risk AI systems that use special categories of data for training, validation or testing.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A13",
+   "es": "Elaboración, mantenimiento y actualización de la documentación técnica completa IA alto riesgo (grandes empresas y proveedores ordinarios)",
+   "en": "Drawing up, maintaining and updating the full technical documentation for high-risk AI (large companies and ordinary providers)",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B13",
+   "es": "Art. 11(1)-(2) RIA, Anexo IV RIA",
+   "en": "Art. 11(1)–(2) and Annex IV AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E13",
+   "es": "Sistemas de IA de alto riesgo que se introduce en el mercado o se pone en servicio en la UE. La obligación recae en quien realice dicha introducción o puesta en servicio.",
+   "en": "High-risk AI systems placed on the market or put into service in the EU. The obligation falls on whoever places the system on the market or puts it into service.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A14",
+   "es": "Elaboración de documentación técnica simplificada IA alto riesgo (PYMEs y empresas emergentes)",
+   "en": "Drawing up simplified technical documentation for high-risk AI (SMEs and start-ups)",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B14",
+   "es": "Art. 11(1)-(2) RIA, Anexo IV RIA",
+   "en": "Art. 11(1)–(2) and Annex IV AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E14",
+   "es": "Ser PYME o empresa emergente que introduzca o ponga en servicio en la UE un sistema de IA de alto riesgo.",
+   "en": "Being an SME or start-up that places on the market or puts into service in the EU a high-risk AI system.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A15",
+   "es": "Implementación de módulo que permita la conservación de registros",
+   "en": "Implementing a module that enables record-keeping",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B15",
+   "es": "Art. 12 RIA",
+   "en": "Art. 12 AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E15",
+   "es": "Ser proveedor de un sistema de IA y/o responsable del despliegue y que el sistema esté clasificado como alto riesgo",
+   "en": "Being the provider and/or deployer of an AI system, with the system classified as high-risk.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A16",
+   "es": "Conservación de registros – identificación biométrica",
+   "en": "Record-keeping – biometric identification",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B16",
+   "es": "Art.12 RIA",
+   "en": "Art. 12 AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E16",
+   "es": "Ser proveedor de un sistema de IA y/o responsable del despliegue, que el sistema esté clasificado como alto riesgo de identificación biométrica",
+   "en": "Being the provider and/or deployer of an AI system, with the system classified as high-risk for biometric identification.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A17",
+   "es": "Transparencia y comunicación de información a los responsables del despliegue",
+   "en": "Transparency and provision of information to deployers",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B17",
+   "es": "Art. 13 RIA",
+   "en": "Art. 13 AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E17",
+   "es": "Ser proveedor de un sistema de IA clasificado como alto riesgo.",
+   "en": "Being the provider of an AI system classified as high-risk.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A18",
+   "es": "Obligaciones de supervisión humana para proveedores",
+   "en": "Human oversight obligations for providers",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B18",
+   "es": "Art. 14(1)–(3)(a)-(b), (5) RIA",
+   "en": "Art. 14(1)–(3)(a)–(b) and (5) AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E18",
+   "es": "Ser proveedor de un sistema de IA clasificado como alto riesgo.",
+   "en": "Being the provider of an AI system classified as high-risk.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A19",
+   "es": "Obligaciones de supervisión humana para el responsable del despliegue",
+   "en": "Human oversight obligations for deployers",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B19",
+   "es": "Art. 14(3)(b), (4)(a)-(e), (5) y art. 26.3 RIA",
+   "en": "Art. 14(3)(b), (4)(a)–(e) and (5) and Art. 26(3) AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E19",
+   "es": "(i) Ser responsable del despliegue de un sistema de IA de alto riesgo.\n (ii) Que el proveedor haya definido medidas de supervisión aplicables.",
+   "en": "(i) Being the deployer of a high-risk AI system.\n(ii) The provider has defined applicable oversight measures.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A20",
+   "es": "Garantizar un nivel adecuado de precisión en el diseño y desarrollo del sistema de IA de alto riesgo",
+   "en": "Ensure an appropriate level of accuracy in the design and development of the high-risk AI system",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B20",
+   "es": "Art. 15(1)–(3) RIA",
+   "en": "Art. 15(1)–(3) AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E20",
+   "es": "Ser proveedor de un sistema de IA de alto riesgo.",
+   "en": "Being the provider of a high-risk AI system.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A21",
+   "es": "Garantizar la solidez del sistema de IA de alto riesgo frente a errores, fallos o incoherencias",
+   "en": "Ensure the robustness of the high-risk AI system against errors, faults or inconsistencies",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B21",
+   "es": "Art. 15(1) y (4) RIA",
+   "en": "Art. 15(1) and (4) AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E21",
+   "es": "Ser proveedor de un sistema de IA de alto riesgo.",
+   "en": "Being the provider of a high-risk AI system.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A22",
+   "es": "Garantizar la ciberseguridad de los sistemas de IA de alto riesgo frente a manipulaciones o ataques",
+   "en": "Ensure the cybersecurity of high-risk AI systems against manipulation or attacks",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B22",
+   "es": "Art. 15(1) y (5) RIA",
+   "en": "Art. 15(1) and (5) AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E22",
+   "es": "Ser proveedor o responsable del despliegue de un sistema de IA de alto riesgo.",
+   "en": "Being the provider or deployer of a high-risk AI system.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A23",
+   "es": "Identificación del proveedor",
+   "en": "Provider identification",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B23",
+   "es": "Art. 16(b) RIA",
+   "en": "Art. 16(b) AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E23",
+   "es": "Ser proveedor de un sistema de IA de alto riesgo.",
+   "en": "Being the provider of a high-risk AI system.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A24",
+   "es": "Sistema de gestión de la calidad",
+   "en": "Quality management system",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B24",
+   "es": "Art. 16(c ) RIA, art. 17 RIA",
+   "en": "Arts. 16(c) and 17 AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E24",
+   "es": "Ser proveedor de un sistema de IA de alto riesgo.",
+   "en": "Being the provider of a high-risk AI system.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A25",
+   "es": "Conservación de documentación",
+   "en": "Documentation keeping",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B25",
+   "es": "Art. 16(d) RIA, art. 18 RIA",
+   "en": "Arts. 16(d) and 18 AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E25",
+   "es": "Ser proveedor de un sistema de IA de alto riesgo.",
+   "en": "Being the provider of a high-risk AI system.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A26",
+   "es": "Conservación de archivos de registro",
+   "en": "Keeping of log files",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B26",
+   "es": "Art. 16(e ) RIA, art. 19, art. 26.6 RIA",
+   "en": "Arts. 16(e), 19 and 26(6) AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E26",
+   "es": "Ser proveedor o responsable del despliegue de un sistema de IA de alto riesgo.",
+   "en": "Being the provider or deployer of a high-risk AI system.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A27",
+   "es": "Evaluación de conformidad",
+   "en": "Conformity assessment",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B27",
+   "es": "Art. 16(f) RIA, art. 43 RIA",
+   "en": "Arts. 16(f) and 43 AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E27",
+   "es": "(i) Ser proveedor de un sistema de IA clasificado como alto riesgo según el RIA (Anexo III o Anexo I, sección A según corresponda).\n (ii) Pretender introducir el sistema en el mercado de la UE o ponerlo en servicio.",
+   "en": "(i) Being the provider of an AI system classified as high-risk under the AI Act (Annex III or Annex I, Section A, as applicable).\n(ii) Intending to place the system on the EU market or put it into service.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A28",
+   "es": "Declaración UE de conformidad",
+   "en": "EU declaration of conformity",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B28",
+   "es": "Art. 16(g) RIA, art. 47 RIA",
+   "en": "Arts. 16(g) and 47 AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E28",
+   "es": "(i) Ser proveedor de un sistema de IA de alto riesgo.\n (ii) Haber completado el procedimiento de evaluación de la conformidad (Art. 43) previo a la introducción en el mercado o puesta en servicio.\n (iii) Pretender introducir o comercializar el sistema dentro del mercado de la Unión.",
+   "en": "(i) Being the provider of a high-risk AI system.\n(ii) Having completed the conformity assessment procedure (Art. 43) before placing on the market or putting into service.\n(iii) Intending to place or make the system available on the Union market.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A29",
+   "es": "Marcado CE",
+   "en": "CE marking",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B29",
+   "es": "Art. 16(h) RIA, art. 48 RIA",
+   "en": "Arts. 16(h) and 48 AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E29",
+   "es": "(i) Ser proveedor de un sistema de IA de alto riesgo.\n (ii) Haber completado satisfactoriamente el procedimiento de evaluación de conformidad.",
+   "en": "(i) Being the provider of a high-risk AI system.\n(ii) Having successfully completed the conformity assessment procedure.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A30",
+   "es": "Registro continuo",
+   "en": "Ongoing registration",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B30",
+   "es": "Art. 16(i) RIA, art. 49(1) RIA",
+   "en": "Arts. 16(i) and 49(1) AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E30",
+   "es": "(i) Ser proveedor de un sistema de IA de alto riesgo.\n (ii) El sistema debe estar enumerado en el Anexo III, excepto los sistemas mencionados en el punto 2 del Anexo III (que se registran a nivel nacional).\n (iii) Que se pretenda introducir el sistema en el mercado de la UE o ponerlo en servicio.\n (iv) Para responsables del despliegue: ser autoridad pública, institución, órgano u organismo de la UE o actuar en su nombre.",
+   "en": "(i) Being the provider of a high-risk AI system.\n(ii) The system must be listed in Annex III, except the systems referred to in point 2 of Annex III (which are registered at national level).\n(iii) Intending to place the system on the EU market or put it into service.\n(iv) For deployers: being a public authority or a Union institution, body, office or agency, or acting on their behalf.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A31",
+   "es": "Medidas correctoras y comunicación",
+   "en": "Corrective actions and communication",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B31",
+   "es": "Art. 16(j) RIA, art. 20 RIA",
+   "en": "Arts. 16(j) and 20 AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E31",
+   "es": "(i) Ser proveedor de un sistema de IA de alto riesgo.\n (ii) Que el sistema de IA de alto riesgo haya sido introducido en el mercado o puesto en servicio.\n (iii) Que exista indicio o certeza de que el sistema no es conforme con el Reglamento o presenta un riesgo de incumplimiento.",
+   "en": "(i) Being the provider of a high-risk AI system.\n(ii) The high-risk AI system has been placed on the market or put into service.\n(iii) There is an indication or certainty that the system does not conform to the Regulation or presents a risk of non-compliance.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A32",
+   "es": "Demostración de conformidad a autoridades",
+   "en": "Demonstrating conformity to authorities",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B32",
+   "es": "Art. 16(k) RIA",
+   "en": "Art. 16(k) AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E32",
+   "es": "Ser proveedor de un sistema de IA de alto riesgo.",
+   "en": "Being the provider of a high-risk AI system.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A33",
+   "es": "Cumplimimiento de accesibilidad",
+   "en": "Accessibility compliance",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B33",
+   "es": "Art. 16(l) RIA",
+   "en": "Art. 16(l) AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E33",
+   "es": "Ser proveedor de un sistema de IA de alto riesgo.",
+   "en": "Being the provider of a high-risk AI system.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A34",
+   "es": "Cooperación con las autoridades competentes",
+   "en": "Cooperation with competent authorities",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B34",
+   "es": "Art. 21 RIA",
+   "en": "Art. 21 AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E34",
+   "es": "Ser proveedor de un sistema de IA de alto riesgo.",
+   "en": "Being the provider of a high-risk AI system.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A35",
+   "es": "Representantes autorizados",
+   "en": "Authorised representatives",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B35",
+   "es": "Art. 22 RIA",
+   "en": "Art. 22 AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E35",
+   "es": "(i) Ser proveedor de sistemas de IA de alto riesgo establecido en terceros países.",
+   "en": "(i) Being a provider of high-risk AI systems established in a third country.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A36",
+   "es": "Obligaciones de los importadaores",
+   "en": "Obligations of importers",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B36",
+   "es": "Art. 23 RIA",
+   "en": "Art. 23 AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E36",
+   "es": "Ser importador de un sistema de IA de alto riesgo que se vaya a introducir en el mercado de la UE.",
+   "en": "Being the importer of a high-risk AI system to be placed on the EU market.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A37",
+   "es": "Obligaciones de los distribuidores de sistemas de IA de alto riesgo",
+   "en": "Obligations of distributors of high-risk AI systems",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B37",
+   "es": "Art. 24 RIA",
+   "en": "Art. 24 AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E37",
+   "es": "Ser distribuidor de un sistema de IA de alto riesgo que se vaya a comercializar en la UE.",
+   "en": "Being the distributor of a high-risk AI system to be made available in the EU.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A38",
+   "es": "Cooperación del proveedor inicial que deja de ser proveedor",
+   "en": "Cooperation of the initial provider that ceases to be the provider",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B38",
+   "es": "Art. 25 RIA",
+   "en": "Art. 25 AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E38",
+   "es": "Haber sido proveedor inicial de un sistema de IA que ahora es gestionado por un nuevo proveedor.",
+   "en": "Having been the initial provider of an AI system that is now managed by a new provider.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A39",
+   "es": "Entregar documentación evaluación de impacto responsables del despliegue",
+   "en": "Impact assessment documentation (deployers)",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B39",
+   "es": "Art. 26(9) RIA Remite art. 35 RGPD",
+   "en": "Art. 26(9) AI Act (refers to Art. 35 GDPR)",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E39",
+   "es": "Obligación de realizar evaluación de impacto. Ser responsable del desplieuge",
+   "en": "Obligation to carry out an impact assessment. Being a deployer.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A40",
+   "es": "Deber de notificación del responsable del despliegue",
+   "en": "Deployer's duty to notify",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B40",
+   "es": "Arts. 26(5), 72, 73 y 79 RIA",
+   "en": "Arts. 26(5), 72, 73 and 79 AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E40",
+   "es": "Ser responsable del despliegue de un sistema de IA de alto riesgo",
+   "en": "Being the deployer of a high-risk AI system.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A41",
+   "es": "Sistema y plan de vigilancia poscomercialización del proveedor",
+   "en": "Provider's post-market monitoring system and plan",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B41",
+   "es": "Art. 72(1)–(4) RIA",
+   "en": "Art. 72(1)–(4) AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E41",
+   "es": "Ser proveedor de un sistema de IA de alto riesgo introducido en el mercado o puesto en servicio en la UE.",
+   "en": "Being the provider of a high-risk AI system placed on the market or put into service in the EU.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A42",
+   "es": "Deber de notificación de incidentes graves del proveedor",
+   "en": "Provider's duty to report serious incidents",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B42",
+   "es": "Art. 73 RIA",
+   "en": "Art. 73 AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E42",
+   "es": "Ser proveedor de un sistema de IA de alto riesgo",
+   "en": "Being the provider of a high-risk AI system.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A43",
+   "es": "Evaluación de impacto de derechos fundamentales para responsables del despliegue en sistemas de alto riesgo",
+   "en": "Fundamental rights impact assessment for deployers of high-risk systems",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B43",
+   "es": "Art. 27 RIA",
+   "en": "Art. 27 AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E43",
+   "es": "Ser responsable del despliegue de un sistema de IA de alto riesgo que cumpla alguna de estas condiciones:\n (i) Sistemas de IA de alto riesgo que no estén en el Anexo III, punto 2 y sean desplegados por organismos de Derecho público o entidades privadas que presten servicios públicos.\n (ii) Sistemas de IA de alto riesgo del Anexo III, punto 5b): sistemas de evaluación de solvencia o calificación crediticia de personas físicas (excluyendo detección de fraude financiero).\n (iii) Sistemas de IA de alto riesgo del Anexo III, punto 5c): sistemas de evaluación de riesgos y fijación de precios en seguros de vida y de salud.",
+   "en": "Being the deployer of a high-risk AI system that meets one of these conditions:\n(i) High-risk AI systems not in point 2 of Annex III deployed by bodies governed by public law or private entities providing public services.\n(ii) High-risk AI systems in point 5(b) of Annex III: systems for evaluating the creditworthiness or establishing the credit score of natural persons (excluding financial fraud detection).\n(iii) High-risk AI systems in point 5(c) of Annex III: risk assessment and pricing systems for life and health insurance.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A44",
+   "es": "REQUISITOS PARA DETERMINADOS SISTEMAS DE IA",
+   "en": "Requirements for certain AI systems",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A45",
+   "es": "Transparencia en interacción directa con personas físicas",
+   "en": "Transparency in direct interaction with natural persons",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B45",
+   "es": "Art. 50(1) RIA",
+   "en": "Art. 50(1) AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E45",
+   "es": "Sistemas de IA que interactúan directamente con personas físicas y no sean sistemas legales de investigación o prevención de delitos.",
+   "en": "AI systems that interact directly with natural persons and are not lawful systems for the investigation or prevention of criminal offences.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A46",
+   "es": "Transparencia en contenido sintético generado por IA",
+   "en": "Transparency of AI-generated synthetic content",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B46",
+   "es": "Art. 50(2) RIA",
+   "en": "Art. 50(2) AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E46",
+   "es": "Sistemas de IA que generan contenido sintético de audio, imagen, vídeo o texto, excepto para funciones de apoyo a edición, sin alteraciones sustanciales o legalmente autorizados para fines delictivos.",
+   "en": "AI systems that generate synthetic audio, image, video or text content, except for assistive editing functions without substantial alterations, or where legally authorised for purposes related to criminal offences.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A47",
+   "es": "Transparencia en sistemas de reconocimiento de emociones y categorización biométrica",
+   "en": "Transparency in emotion recognition and biometric categorisation systems",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B47",
+   "es": "Art. 50(3) RIA",
+   "en": "Art. 50(3) AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E47",
+   "es": "Sistemas de reconocimiento de emociones o de categorización biométrica que interactúan con personas físicas y no estén legalmente autorizados para fines de investigación delictiva.",
+   "en": "Emotion recognition or biometric categorisation systems that interact with natural persons and are not legally authorised for criminal investigation purposes.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A48",
+   "es": "Transparencia en contenido generado o manipulado con ultrasuplantación",
+   "en": "Transparency of content generated or manipulated as a deep fake",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B48",
+   "es": "Art. 50(4) RIA",
+   "en": "Art. 50(4) AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E48",
+   "es": "Sistemas de IA que generen o manipulen imágenes, audio, vídeo o texto con ultrasuplantación o contenidos informativos al público.",
+   "en": "AI systems that generate or manipulate image, audio, video or text constituting a deep fake, or informative content for the public.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A49",
+   "es": "MODELOS DE IA DE USO GENERAL",
+   "en": "General-purpose AI models",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A50",
+   "es": "Notificar y colaborar con la Comisión en el procedimiento de clasificación de modelos de IA de uso general con riesgo sistémico potencial",
+   "en": "Notify and cooperate with the Commission in the classification procedure for general-purpose AI models with potential systemic risk",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B50",
+   "es": "Art. 51(1)-(2) y Art. 52(1)-(4) RIA",
+   "en": "Arts. 51(1)–(2) and 52(1)–(4) AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E50",
+   "es": "(i) Modelos de IA de uso general que alcancen, superen o estén próximos a alcanzar el umbral de cómputo o de impacto del art. 51(1)-(2) RIA.\n (ii) Modelos evaluados por la Comisión o por el grupo de expertos científicos conforme al Anexo XIII.",
+   "en": "(i) General-purpose AI models that reach, exceed or are close to reaching the computation or impact threshold of Art. 51(1)–(2) AI Act.\n(ii) Models assessed by the Commission or by the scientific panel of experts under Annex XIII.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A51",
+   "es": "Obligaciones de documentación, transparencia y cooperación para proveedores de modelos de IA de uso general",
+   "en": "Documentation, transparency and cooperation obligations for providers of general-purpose AI models",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B51",
+   "es": "Art. 53(1)-(7) RIA",
+   "en": "Art. 53(1)–(7) AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E51",
+   "es": "(i) Proveedores de modelos de IA de uso general, salvo los divulgados con licencia libre y de código abierto, excepto si el modelo es de riesgo sistémico.",
+   "en": "(i) Providers of general-purpose AI models, except those released under a free and open-source licence, unless the model presents systemic risk.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A52",
+   "es": "Nombrar y habilitar un representante autorizado en la UE para proveedores de terceros países",
+   "en": "Appoint and empower an authorised representative in the EU for providers from third countries",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B52",
+   "es": "Art. 54 RIA",
+   "en": "Art. 54 AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E52",
+   "es": "(i) Proveedor establecido fuera de la UE.\n (ii) Modelo de IA de uso general que no esté bajo licencia libre y código abierto, salvo que sea de riesgo sistémico.",
+   "en": "(i) Provider established outside the EU.\n(ii) General-purpose AI model not under a free and open-source licence, unless it presents systemic risk.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A53",
+   "es": "MODELOS DE IA DE USO GENERAL CON RIESGO SISTÉMICO",
+   "en": "General-purpose AI models with systemic risk",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A54",
+   "es": "Evaluación mediante protocolos normalizados y pruebas de simulación de adversarios",
+   "en": "Evaluation using standardised protocols and adversarial testing",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B54",
+   "es": "Art. 55(1)(a) RIA",
+   "en": "Art. 55(1)(a) AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E54",
+   "es": "Modelos de IA de uso general con riesgo sistémico. Ser proveedor.",
+   "en": "General-purpose AI models with systemic risk. Being the provider.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A55",
+   "es": "Evaluación y mitigación de riesgos sistémicos a escala de la Unión",
+   "en": "Assessment and mitigation of systemic risks at Union level",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B55",
+   "es": "Art. 55(1)(b) RIA",
+   "en": "Art. 55(1)(b) AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E55",
+   "es": "Modelos de IA de uso general con riesgo sistémico. Ser proveedor.",
+   "en": "General-purpose AI models with systemic risk. Being the provider.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A56",
+   "es": "Vigilancia, documentación y comunicación de incidentes graves",
+   "en": "Tracking, documenting and reporting serious incidents",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B56",
+   "es": "Art. 55(1)(c) RIA",
+   "en": "Art. 55(1)(c) AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E56",
+   "es": "Modelos de IA de uso general con riesgo sistémico. Ser proveedor.",
+   "en": "General-purpose AI models with systemic risk. Being the provider.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A57",
+   "es": "Garantizar ciberseguridad del modelo y de la infraestructura",
+   "en": "Ensure cybersecurity of the model and the infrastructure",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B57",
+   "es": "Art. 55(1)(d) RIA",
+   "en": "Art. 55(1)(d) AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E57",
+   "es": "Modelos de IA de uso general con riesgo sistémico. Ser proveedor.",
+   "en": "General-purpose AI models with systemic risk. Being the provider.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A58",
+   "es": "Obligaciones para pruebas de sistemas IA de alto riesgo en condiciones reales fuera de los espacios controlados de pruebas para IA",
+   "en": "Obligations for testing high-risk AI systems in real-world conditions outside AI regulatory sandboxes",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B58",
+   "es": "Art. 60(1)-(9) y art. 61 RIA",
+   "en": "Arts. 60(1)–(9) and 61 AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E58",
+   "es": "(i) Ser proveedor o proveedor potencial de un sistema de IA de alto riesgo conforme al Anexo III RIA.\n (ii) Pretender realizar pruebas en condiciones reales fuera de los espacios controlados de pruebas para IA.\n (iii) Contar con un plan de prueba en condiciones reales aprobado por la autoridad de vigilancia del mercado del Estado miembro.",
+   "en": "(i) Being the provider or prospective provider of a high-risk AI system under Annex III AI Act.\n(ii) Intending to test in real-world conditions outside AI regulatory sandboxes.\n(iii) Having a real-world testing plan approved by the market surveillance authority of the member state.",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!A59",
+   "es": "Adhesión al código de buenas prácticas",
+   "en": "Adherence to the code of practice",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!B59",
+   "es": "Art. 56(7) RIA",
+   "en": "Art. 56(7) AI Act",
+   "status": "proposed"
+  },
+  {
+   "key": "Global - AI Act!E59",
+   "es": "Ser proveedor de modelo de IA de uso general",
+   "en": "Being the provider of a general-purpose AI model.",
+   "status": "proposed"
+  },
+  {
+   "key": "ai act!A1",
+   "es": "El concepto de minimal risk del AI Act no equivale a bajo riesgo de ciberseguridad",
+   "en": "The AI Act's concept of minimal risk is not equivalent to low cybersecurity risk",
+   "status": "proposed"
+  },
+  {
+   "key": "ai act!A2",
+   "es": "El AI Act no clasifica por superficie de ataque, sino por impacto legal y social directo.",
+   "en": "The AI Act does not classify by attack surface, but by direct legal and social impact.",
+   "status": "proposed"
+  },
+  {
+   "key": "ai act!A3",
+   "es": "Muchos sistemas minimal risk son: accesibles públicamente, altamente escalables, integrados con datos externos, etc",
+   "en": "Many minimal-risk systems are publicly accessible, highly scalable, integrated with external data, etc.",
+   "status": "proposed"
+  },
+  {
+   "key": "ai act!A4",
+   "es": "Marcos como NIST y ENISA muestran que muchos sistemas clasificados como minimal risk presentan superficies de ataque considerables, lo que justifica controles de seguridad adicionales aunque la regulación no los exija",
+   "en": "Frameworks such as NIST and ENISA show that many systems classified as minimal risk present considerable attack surfaces, which justifies additional security controls even if regulation does not require them.",
+   "status": "proposed"
+  },
+  {
+   "key": "ai act!A5",
+   "es": "Unlike the AI Act, the NIST AI RMF does not define a minimal risk category. Risk is assessed based on technical exposure, data flows and attack surfaces, which means that many systems classified as minimal risk under the AI Act still require robust cybersecurity controls",
+   "en": "Unlike the AI Act, the NIST AI RMF does not define a minimal risk category. Risk is assessed based on technical exposure, data flows and attack surfaces, which means that many systems classified as minimal risk under the AI Act still require robust cybersecurity controls.",
+   "status": "proposed"
+  },
+  {
+   "key": "ai act!A6",
+   "es": "Los sistemas no críticos desde el punto de vista legal pueden ser críticos desde el punto de vista de seguridad",
+   "en": "Systems that are not critical from a legal standpoint can be critical from a security standpoint.",
+   "status": "proposed"
+  },
+  {
+   "key": "ai act!A7",
+   "es": "aplicar controles proporcionados a la exposición, no al sector.",
+   "en": "Apply controls proportional to exposure, not to sector.",
+   "status": "proposed"
+  },
+  {
+   "key": "ai act!A11",
+   "es": "Data poisoning",
+   "en": "Data poisoning",
+   "status": "proposed"
+  },
+  {
+   "key": "ai act!B11",
+   "es": "Introducción de datos maliciosos en entrenamiento o reentrenamiento para alterar el comportamiento del modelo.",
+   "en": "Introducing malicious data into training or retraining to alter the model's behaviour.",
+   "status": "proposed"
+  },
+  {
+   "key": "ai act!C11",
+   "es": "Los sistemas minimal risk suelen entrenarse o ajustarse con datos abiertos, inputs de usuario o reentrenamiento continuo. Al no considerarse críticos, no se imponen controles estrictos sobre la calidad e integridad de los datos, lo que permite introducir datos maliciosos sin ser detectados.",
+   "en": "Minimal-risk systems are often trained or fine-tuned with open data, user inputs or continuous retraining. Because they are not considered critical, no strict controls are imposed on data quality and integrity, which allows malicious data to be introduced undetected.",
+   "status": "proposed"
+  },
+  {
+   "key": "ai act!A12",
+   "es": "Prompt injection",
+   "en": "Prompt injection",
+   "status": "proposed"
+  },
+  {
+   "key": "ai act!B12",
+   "es": "Manipulación del modelo mediante entradas diseñadas para eludir restricciones o cambiar su comportamiento.",
+   "en": "Manipulating the model through inputs designed to bypass restrictions or change its behaviour.",
+   "status": "proposed"
+  },
+  {
+   "key": "ai act!C12",
+   "es": "Muchos sistemas minimal risk son interactivos (chatbots, ETC.). El modelo acepta instrucciones directas del usuario y no existe separación clara entre datos y control, lo que facilita que un atacante manipule el comportamiento del sistema mediante texto.",
+   "en": "Many minimal-risk systems are interactive (chatbots, etc.). The model accepts direct instructions from the user and there is no clear separation between data and control, which makes it easier for an attacker to manipulate the system's behaviour through text.",
+   "status": "proposed"
+  },
+  {
+   "key": "ai act!A13",
+   "es": "Indirect prompt injection",
+   "en": "Indirect prompt injection",
+   "status": "proposed"
+  },
+  {
+   "key": "ai act!B13",
+   "es": "El modelo ejecuta instrucciones ocultas dentro de datos externos (documentos, webs, emails).",
+   "en": "The model executes instructions hidden in external data (documents, websites, emails).",
+   "status": "proposed"
+  },
+  {
+   "key": "ai act!C13",
+   "es": "Estos sistemas suelen integrarse con fuentes externas (documentos, etc). Al no considerarse de alto riesgo, no se filtra ni valida el contenido externo como potencial vector de ataque, permitiendo instrucciones ocultas que el modelo ejecuta sin distinguirlas de datos legítimos.",
+   "en": "These systems are often integrated with external sources (documents, etc.). Because they are not considered high-risk, external content is not filtered or validated as a potential attack vector, allowing hidden instructions that the model executes without distinguishing them from legitimate data.",
+   "status": "proposed"
+  },
+  {
+   "key": "ai act!A14",
+   "es": "Model extraction / stealing",
+   "en": "Model extraction / stealing",
+   "status": "proposed"
+  },
+  {
+   "key": "ai act!B14",
+   "es": "Reconstrucción parcial o total del modelo mediante consultas repetidas a la API.",
+   "en": "Partial or total reconstruction of the model through repeated queries to the API.",
+   "status": "proposed"
+  },
+  {
+   "key": "ai act!C14",
+   "es": "Al tratarse de sistemas no críticos, se suelen exponer mediante APIs, con autenticación débil y sin límites estrictos. Esta accesibilidad facilita ataques por consultas repetidas para reconstruir el modelo.",
+   "en": "As non-critical systems, they are often exposed through APIs with weak authentication and without strict limits. This accessibility facilitates attacks using repeated queries to reconstruct the model.",
+   "status": "proposed"
+  },
+  {
+   "key": "ai act!A15",
+   "es": "Membership inference",
+   "en": "Membership inference",
+   "status": "proposed"
+  },
+  {
+   "key": "ai act!B15",
+   "es": "Inferir si un dato concreto fue usado en el entrenamiento.",
+   "en": "Inferring whether a specific data point was used in training.",
+   "status": "proposed"
+  },
+  {
+   "key": "ai act!C15",
+   "es": "Muchos sistemas minimal risk usan datos reales de usuarios (texto, feedback) para mejorar el rendimiento. Al no estar clasificados como sensibles, no se aplican defensas avanzadas, permitiendo inferir si un dato concreto formó parte del entrenamiento.",
+   "en": "Many minimal-risk systems use real user data (text, feedback) to improve performance. Because they are not classified as sensitive, advanced defences are not applied, making it possible to infer whether a specific data point was part of the training set.",
+   "status": "proposed"
+  },
+  {
+   "key": "ai act!A16",
+   "es": "Model inversion",
+   "en": "Model inversion",
+   "status": "proposed"
+  },
+  {
+   "key": "ai act!B16",
+   "es": "Reconstrucción aproximada de datos de entrenamiento a partir de salidas del modelo.",
+   "en": "Approximate reconstruction of training data from the model's outputs.",
+   "status": "proposed"
+  },
+  {
+   "key": "ai act!C16",
+   "es": "En modelos accesibles públicamente, las salidas detalladas facilita la reconstruircción de la información del entrenamiento, un riesgo no contemplado en la categoría minimal risk",
+   "en": "In publicly accessible models, detailed outputs make it easier to reconstruct training information, a risk not considered in the minimal-risk category.",
+   "status": "proposed"
+  },
+  {
+   "key": "AI Act Gaps!A1",
+   "es": "Carencias del AI Act",
+   "en": "AI Act gaps",
+   "status": "proposed"
+  }
+ ]
+}

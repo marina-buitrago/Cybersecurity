@@ -1,0 +1,153 @@
+{
+ "readme": {
+  "title": "AI cybersecurity controls catalogue",
+  "version": "Version 0.1 · 3 November 2026 · Status: proposed, pending validation",
+  "sections": [
+   {
+    "title": "How it was built",
+    "lines": [
+     "1. Techniques: the 123 techniques of the JNIC matrix (sheet Attacks-phase-standardregulatio), checked against MITRE ATLAS release 2026.10 (published 28/10/2026, repository mitre-atlas/atlas-data).",
+     "2. Controls: each of the 44 ATLAS 2026.10 mitigations has been turned into one or more concrete controls. Broad mitigations (e.g. AML.M0020 Generative AI Guardrails) have been split according to the guidance ATLAS gives for each technique.",
+     "3. Gaps: controls have been proposed for the 18 matrix techniques with no ATLAS mitigation; their link is marked \"proposed\". With this, the 123 matrix techniques and the 98 ATLAS 2026.10 techniques the matrix does not include are all covered by at least one control.",
+     "4. Standards and law: each control cites the ETSI EN 304 223 V2.1.1 (2025-12) provisions that require or recommend it, the ISO/IEC 27001:2022 Annex A control that frames it and, where it applies because of the purpose, the AI Act or GDPR article."
+    ]
+   },
+   {
+    "title": "Citation rules",
+    "lines": [
+     "Where a source exists, it is cited with its exact identifier. Where none exists, none is invented: the column \"If there is no source\" explains why the control matters from a cybersecurity standpoint.",
+     "ETSI EN 304 223: \"shall\" = requirement for conformity with the standard; \"should\" = recommendation. The standard is voluntary unless a contract or a law makes it binding.",
+     "ISO/IEC 27001:2022: indicates the general control that frames the measure; it does not mean ISO prescribes the AI-specific measure.",
+     "Legal basis: only binding if the stated condition is met (e.g. high-risk system; processing of personal data). The purpose does not add or remove techniques: it only adds this layer."
+    ]
+   },
+   {
+    "title": "Concreteness",
+    "lines": [
+     "Concrete: the source prescribes a measure, mechanism or verifiable evidence. Abstract: the source sets an objective without saying how to achieve it.",
+     "AI Act: classification taken from the JNIC matrix sheet \"Global - AI Act\" (Material = Concrete). Those marked * (GDPR, Art. 26(6) AI Act), the ETSI ones and the ATLAS ones are a proposed classification.",
+     "Every control in the catalogue is written in concrete terms, even when its source is abstract."
+    ]
+   },
+   {
+    "title": "How it is applied",
+    "lines": [
+     "Each matrix technique has a proposed condition (\"Applies when\") and each control has another (\"Condition\"), both expressed over the questionnaire flags (sheet \"Flags\"). \"I don't know\" sets the flag to true.",
+     "A control is shown if its condition is met; it lists the applicable techniques it mitigates. Its legal basis is shown only if the rule in sheet \"Legal basis\" is met.",
+     "A control covers a technique if it mitigates it directly or mitigates its parent technique. \"Cross-cutting\" controls are not linked to specific techniques.",
+     "Findings on the matrix: see sheet \"Matrix techniques\", column \"Notes\" (retired IDs, new ATLAS mitigations), and sheet \"ATLAS outside the matrix\"."
+    ]
+   },
+   {
+    "title": "Sources",
+    "lines": [
+     "MITRE ATLAS 2026.10, https://github.com/mitre-atlas/atlas-data · ETSI EN 304 223 V2.1.1 (2025-12), https://www.etsi.org/deliver/etsi_en/304200_304299/304223/02.01.01_60/en_304223v020101p.pdf · ISO/IEC 27001:2022 Annex A · Regulation (EU) 2024/1689 (AI Act) · Regulation (EU) 2016/679 (GDPR) · JNIC 26 matrix \"Tech-legal alignment in AI security\" (NIST AI 600-1 per technique)."
+    ]
+   }
+  ]
+ },
+ "summary": {
+  "families": [
+   {
+    "family": "Governance and secure design",
+    "controls": 4,
+    "withAtlasLink": 1
+   },
+   {
+    "family": "Inventory and traceability",
+    "controls": 4,
+    "withAtlasLink": 2
+   },
+   {
+    "family": "Supply chain",
+    "controls": 7,
+    "withAtlasLink": 5
+   },
+   {
+    "family": "Training, fine-tuning and RAG data",
+    "controls": 8,
+    "withAtlasLink": 6
+   },
+   {
+    "family": "Model robustness",
+    "controls": 7,
+    "withAtlasLink": 7
+   },
+   {
+    "family": "Identity, access and infrastructure",
+    "controls": 9,
+    "withAtlasLink": 5
+   },
+   {
+    "family": "Information and output exposure",
+    "controls": 5,
+    "withAtlasLink": 4
+   },
+   {
+    "family": "Generative AI inputs and outputs",
+    "controls": 9,
+    "withAtlasLink": 8
+   },
+   {
+    "family": "Agents and tools",
+    "controls": 13,
+    "withAtlasLink": 12
+   },
+   {
+    "family": "Testing and evaluation",
+    "controls": 2,
+    "withAtlasLink": 2
+   },
+   {
+    "family": "Monitoring, detection and response",
+    "controls": 7,
+    "withAtlasLink": 3
+   },
+   {
+    "family": "People and communication",
+    "controls": 3,
+    "withAtlasLink": 2
+   },
+   {
+    "family": "End of life",
+    "controls": 1,
+    "withAtlasLink": 0
+   },
+   {
+    "family": "Total",
+    "controls": 79,
+    "withAtlasLink": 57
+   }
+  ],
+  "figures": [
+   {
+    "label": "Techniques (unique IDs)",
+    "value": 123
+   },
+   {
+    "label": "Covered by a control with an official ATLAS link",
+    "value": 105
+   },
+   {
+    "label": "Covered only by proposed controls",
+    "value": 18
+   },
+   {
+    "label": "Without any control",
+    "value": 0
+   },
+   {
+    "label": "Matrix records no MITRE mitigation but ATLAS 2026.10 has one",
+    "value": 46
+   },
+   {
+    "label": "IDs no longer in ATLAS 2026.10",
+    "value": 4
+   },
+   {
+    "label": "ATLAS 2026.10 techniques not in the matrix",
+    "value": 98
+   }
+  ]
+ }
+}

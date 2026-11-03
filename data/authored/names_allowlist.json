@@ -1,0 +1,4 @@
+{
+ "description": "Generic capitalised terms (not names of people or companies) that the build's name check may ignore. Every entry must be reviewable as obviously generic.",
+ "terms": []
+}
