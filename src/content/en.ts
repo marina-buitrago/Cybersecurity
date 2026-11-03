@@ -256,8 +256,6 @@ export const en = {
   how: {
     title: "How it's implemented",
     lead: 'How the Cybersecurity Initiative works: the source matrices, the questionnaire logic and the mapping rules.',
-    sectionsLabel: 'Section',
-    sections: { cyber: 'Cybersecurity', sources: 'Sources and versions' },
     cyber: {
       pipelineLabel: 'Pipeline',
       pipeline: [
@@ -422,14 +420,6 @@ export const en = {
       papersCols: { reference: 'Reference', abstract: 'Abstract' },
       yes: 'Yes',
       no: 'No',
-    },
-    sources: {
-      title: 'Sources and versions',
-      dataset: 'Dataset',
-      datasetBuilt: (d: string) => `Built ${d} by scripts/build_data.py from the two spreadsheets below.`,
-      files: 'Source files',
-      cited: 'Sources cited by the catalogue (README)',
-      atlasRelease: 'ATLAS release',
     },
   },
   common: {
