@@ -1,0 +1,246 @@
+/* ---------- Identity and menu (shared by home and inner pages) ---------- */
+.identity-name {
+  display: inline-block;
+  color: var(--white);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+}
+.identity-name:hover {
+  color: var(--white);
+}
+.logo-line {
+  display: block;
+  width: 48px;
+  height: 3px;
+  margin: 10px 0 12px;
+  background: var(--coral-red);
+}
+.identity-descriptor {
+  color: var(--text-muted);
+  font-size: var(--fs-small);
+  max-width: 32ch;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.menu li + li {
+  margin-top: 6px;
+}
+.menu a {
+  display: inline-flex;
+  gap: 10px;
+  align-items: baseline;
+  text-decoration: none;
+  font-size: 15px;
+}
+.menu a .arrow {
+  color: var(--subtitle-red);
+}
+.menu a:hover,
+.menu a[aria-current='page'] {
+  color: var(--menu-red);
+}
+.menu a[aria-current='page'] .arrow {
+  color: var(--menu-red);
+}
+
+/* ---------- Home: full-viewport panel grid, at most six blocks ---------- */
+.home {
+  min-height: 100vh;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    'identity menu time'
+    'intro intro action'
+    'work work work';
+}
+.home-identity {
+  grid-area: identity;
+}
+.home-menu {
+  grid-area: menu;
+}
+.home-time {
+  grid-area: time;
+}
+.home-intro {
+  grid-area: intro;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.home-intro h1 {
+  max-width: 18ch;
+}
+.home-action {
+  grid-area: action;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+.home-work {
+  grid-area: work;
+}
+.tagline {
+  color: var(--white);
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+.clock {
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  font-size: var(--fs-small);
+}
+
+/* "name · category · year" rows; the whole row is the link */
+.work-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: var(--hair);
+}
+.work-row {
+  display: grid;
+  grid-template-columns: 3ch minmax(0, 1.2fr) minmax(0, 2fr) 5ch 2ch;
+  gap: 16px;
+  align-items: baseline;
+  padding: 12px 0;
+  border-bottom: var(--hair);
+  text-decoration: none;
+}
+.work-row .work-n,
+.work-row .work-year {
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  font-size: var(--fs-small);
+}
+.work-row .work-name {
+  color: var(--white);
+}
+.work-row .work-cat {
+  color: var(--text-muted);
+}
+.work-row .work-arrow {
+  color: var(--coral-red);
+  visibility: hidden;
+}
+.work-row:hover,
+.work-row:focus-visible {
+  background: var(--hover-bg);
+  color: inherit;
+}
+.work-row:hover .work-arrow,
+.work-row:focus-visible .work-arrow {
+  visibility: visible;
+}
+
+/* ---------- Inner pages: left column identity + menu, right column content ---------- */
+.shell {
+  min-height: 100vh;
+  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+  align-items: stretch;
+}
+.shell-side {
+  display: flex;
+  flex-direction: column;
+}
+.shell-side .block + .block {
+  border-top: var(--hair);
+}
+.shell-side-sticky {
+  position: sticky;
+  top: 0;
+}
+.shell-main {
+  min-width: 0;
+}
+.page-head {
+  padding: var(--pad);
+  border-bottom: var(--hair);
+}
+.page-head h1 {
+  font-size: clamp(26px, 3.2vw, 40px);
+  margin-bottom: 8px;
+}
+.page-head .lead {
+  color: var(--text-muted);
+  max-width: 75ch;
+}
+.section {
+  padding: var(--pad);
+  border-bottom: var(--hair);
+}
+.section:last-child {
+  border-bottom: 0;
+}
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.section-head .label {
+  margin: 0;
+}
+.readable {
+  max-width: 78ch;
+}
+
+@media (max-width: 1000px) {
+  .home {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      'identity menu'
+      'intro intro'
+      'time action'
+      'work work';
+    grid-template-rows: auto 1fr auto auto;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --pad: 16px;
+  }
+  .home {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'identity' 'menu' 'intro' 'action' 'work' 'time';
+    grid-template-rows: none;
+  }
+  .home-intro h1 {
+    max-width: none;
+  }
+  .work-row {
+    grid-template-columns: 3ch minmax(0, 1fr) 5ch;
+    row-gap: 2px;
+  }
+  .work-row .work-cat {
+    grid-column: 2 / 4;
+    grid-row: 2;
+    font-size: var(--fs-small);
+  }
+  .work-row .work-arrow {
+    display: none;
+  }
+  .shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .shell-side-sticky {
+    position: static;
+  }
+  .kv {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+  }
+  .kv dd {
+    margin-bottom: 8px;
+  }
+}
